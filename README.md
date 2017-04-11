@@ -1,5 +1,7 @@
 # React Select Item
 ### This is a fork from [react-select-box](https://github.com/instructure/react-select-box)
+#### Motivation
+The parent repository does not look like something alive. And i want to continue with react-select-box as alternative project.
 
 [![Build Status](https://travis-ci.org/BusinessDuck/react-select-item.svg?branch=master)](https://travis-ci.org/BusinessDuck/react-select-item) 
 
