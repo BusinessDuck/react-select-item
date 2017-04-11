@@ -7,7 +7,7 @@ The parent repository does not look like something alive. And i want to continue
 
 Simple and awesome react select component, complete with react ^14.0
 
-##[Demo](https://businessduck.github.io/react-select-item/)
+## [Demo](https://businessduck.github.io/react-select-item/)
 
 ## Installation
 
