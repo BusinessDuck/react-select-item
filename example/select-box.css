@@ -225,3 +225,10 @@ input.react-select-box {
     position: absolute;
     left: -99999em;
 }
+
+.react-select-box-off-screen.no-items {
+    padding-left: 20px;
+    font-size: 12px;
+    color: #7B8E9B;
+    font-weight: bold;
+}

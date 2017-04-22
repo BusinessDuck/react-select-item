@@ -12,7 +12,8 @@ var Example = React.createFactory(React.createClass({
 	getInitialState: function () {
 		return {
 			color: null,
-			colors: []
+			colors: [],
+			searchColors: []
 		}
 	},
 	handleChange: function (color) {
@@ -20,6 +21,9 @@ var Example = React.createFactory(React.createClass({
 	},
 	handleMultiChange: function (colors) {
 		this.setState({colors: colors})
+	},
+	handleMultiSearchChange: function (colors) {
+		this.setState({searchColors: colors})
 	},
 	render: function () {
 		return (
@@ -58,9 +62,10 @@ var Example = React.createFactory(React.createClass({
 				SelectBox(
 					{
 						label: "Favorite Colors",
-						onChange: this.handleMultiChange,
-						value: this.state.colors,
+						onChange: this.handleMultiSearchChange,
+						value: this.state.searchColors,
 						multiple: true,
+						noItemsText: "No items found",
 						filterFn: function (text, item) {
 							return item.label.indexOf(text) !== -1
 						},
