@@ -30,7 +30,11 @@ var Example = React.createFactory(React.createClass({
             label: "Favorite Color",
             className: 'my-example-select-box',
             onChange: this.handleChange,
-            value: this.state.color
+            value: this.state.color,
+            search: {
+              filterFn: (text, item) => {item.value.indexOf(text) !== -1},
+
+            }
           },
           option({ key: 'red', value: 'red' }, 'Red'),
           option({ value: 'green' }, 'Green'),
