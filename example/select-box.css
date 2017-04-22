@@ -18,6 +18,14 @@
     background-color: transparent;
 }
 
+input.react-select-box {
+    box-sizing: border-box;
+    padding-left: 15px;
+    color: #7B8E9B;
+    background: url('search-icon.png') no-repeat scroll 9px 15px;
+    padding-left: 30px;
+}
+
 .react-select-box:focus {
     outline: 0;
     box-shadow: 0 0 4px #0493D1;
