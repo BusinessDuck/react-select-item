@@ -104,9 +104,9 @@ input.react-select-box {
     border-radius: 100%;
     font-size: 13px;
     color: #fff;
-    line-height: 1;
-    width: 15px;
-    height: 15px;
+    line-height: 1.1;
+    width: 14px;
+    height: 14px;
     text-indent: 0;
     text-align: center;
 }
@@ -114,6 +114,7 @@ input.react-select-box {
 .react-select-box-clear:hover,
 .react-select-box-clear:focus {
     outline: 0;
+    cursor: pointer;
 }
 
 .react-select-box-clear:hover:before,
@@ -195,7 +196,6 @@ input.react-select-box {
 .react-select-box-option-focused {
     color: #0493D1;
     outline: 0;
-    background-color: #DDE2E5;
 }
 
 .react-select-box-close {

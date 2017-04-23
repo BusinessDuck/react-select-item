@@ -1,5 +1,5 @@
 const React = require('react')
-const SelectBox = React.createFactory(require('../lib/select-box'))
+const SelectBox = React.createFactory(require('../src/select-item'))
 const TestUtils = require('react-addons-test-utils')
 const objectAssign = require('object-assign');
 

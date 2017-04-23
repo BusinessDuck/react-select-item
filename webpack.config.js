@@ -1,19 +1,14 @@
-module.exports = {
-	entry: "./example/main.js",
-	output: {
-		library: 'ReactSelectBox',
-		libraryTarget: 'umd'
-	},
+/* global __dirname, require, module */
+const path = require('path');
 
-	externals: {
-		react: 'react',
-		'react/addons': 'react'
-	},
-	debug: true,
+module.exports = {
+	context: path.resolve(__dirname, './src'),
 	devtool: '#source-map',
-	module: {
-		loaders: [
-			{test: /\.js$/, loader: 'jsx-loader'}
-		]
-	}
+	entry: {
+		app: './select-item.js',
+	},
+	output: {
+		path: path.resolve(__dirname, './dist'),
+		filename: 'select-item.js',
+	},
 };

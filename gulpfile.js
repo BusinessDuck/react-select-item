@@ -29,7 +29,7 @@ gulp.task('server', function () {
 })
 
 gulp.task('lint', function () {
-	return gulp.src(['lib/**/*.js'])
+	return gulp.src(['src/**/*.js'])
 		.pipe(cache('linting'))
 		.pipe(eslint(eslintConfig))
 		.pipe(eslint.format())
@@ -39,5 +39,5 @@ gulp.task('default', ['browserify'])
 
 gulp.task('serve', ['static', 'browserify', 'lint', 'server'], function () {
 	gulp.watch(['example/**/*.*'], ['static', 'browserify'])
-	gulp.watch(['lib/**/*.*'], ['browserify'])
+	gulp.watch(['src/**/*.*'], ['browserify'])
 })
