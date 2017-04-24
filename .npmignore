@@ -1,6 +1,7 @@
 examples
 test
 karma.conf.js
-gulpfile.js
+webpack.*
+*.yml
 .idea
 *.log
