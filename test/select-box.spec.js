@@ -1,11 +1,13 @@
-const React = require('react')
-const SelectBox = React.createFactory(require('../lib/select-item'))
-const TestUtils = require('react-addons-test-utils')
-const objectAssign = require('object-assign');
+import React from 'react';
+import SelectItemComponent from '../lib/select-item';
+import TestUtils from 'react-addons-test-utils';
+import objectAssign from 'object-assign';
 
-describe('SelectBox component', function () {
+const SelectItem = React.createFactory(SelectItemComponent);
 
-  var selectBox
+describe('SelectItem component', function () {
+
+  var selectItem
   const testOptions = [
     { value: 'red', label: 'Red' },
     { value: 'green', label: 'Green' },
@@ -21,7 +23,7 @@ describe('SelectBox component', function () {
 
   function setProps(props, callback) {
     var readyProps = [ objectAssign({}, defaultProps[ 0 ], props), childrens ]
-    selectBox = TestUtils.renderIntoDocument(SelectBox.apply(null, readyProps))
+    selectItem = TestUtils.renderIntoDocument(SelectItem.apply(null, readyProps))
     return callback()
   }
 
@@ -33,22 +35,22 @@ describe('SelectBox component', function () {
     var args = childrens.slice();
     args.unshift(defaultProps);
 
-    selectBox = TestUtils.renderIntoDocument(SelectBox.apply(null, args))
+    selectItem = TestUtils.renderIntoDocument(SelectItem.apply(null, args))
   })
 
   it('should render the label when no value is selected', function () {
     var label = TestUtils.scryRenderedDOMComponentsWithClass(
-      selectBox,
+      selectItem,
       'react-select-box-label'
     )
     label.should.have.length(1)
-    label[ 0 ].textContent.should.equal(selectBox.props.label)
+    label[ 0 ].textContent.should.equal(selectItem.props.label)
   })
 
   it('should render the label for the selected value', function (done) {
     setProps({ value: testOptions[ 0 ].value }, function () {
       var label = TestUtils.scryRenderedDOMComponentsWithClass(
-        selectBox,
+        selectItem,
         'react-select-box-label'
       )
       label.should.have.length(1)
@@ -60,7 +62,7 @@ describe('SelectBox component', function () {
   it('should not render the clear button with no value selected', function (done) {
     setProps({ value: null }, function () {
       var clear = TestUtils.scryRenderedDOMComponentsWithClass(
-        selectBox,
+        selectItem,
         'react-select-box-clear'
       )
       clear.should.have.length(0)
@@ -72,7 +74,7 @@ describe('SelectBox component', function () {
   it('should render the clear button with a selected value', function (done) {
     setProps({ value: testOptions[ 0 ].value }, function () {
       var clear = TestUtils.scryRenderedDOMComponentsWithClass(
-        selectBox,
+        selectItem,
         'react-select-box-clear'
       )
       clear.should.have.length(1)
@@ -81,9 +83,9 @@ describe('SelectBox component', function () {
   })
 
   it('should add hidden class to options when state.open is false', function (done) {
-    selectBox.setState({ open: false }, function () {
+    selectItem.setState({ open: false }, function () {
       var options = TestUtils.scryRenderedDOMComponentsWithClass(
-        selectBox,
+        selectItem,
         'react-select-box-options'
       )
       options.should.have.length(1)
@@ -93,9 +95,9 @@ describe('SelectBox component', function () {
   })
 
   it('should render options', function (done) {
-    selectBox.setState({ open: true }, function () {
+    selectItem.setState({ open: true }, function () {
       var options = TestUtils.scryRenderedDOMComponentsWithClass(
-        selectBox,
+        selectItem,
         'react-select-box-options'
       )
       options.should.have.length(1)
@@ -104,9 +106,9 @@ describe('SelectBox component', function () {
   })
 
   it('should show an option for each option in props.options', function (done) {
-    selectBox.setState({ open: true }, function () {
+    selectItem.setState({ open: true }, function () {
       var options = TestUtils.scryRenderedDOMComponentsWithClass(
-        selectBox,
+        selectItem,
         'react-select-box-option'
       )
       options.should.have.length(options.length)
@@ -118,24 +120,24 @@ describe('SelectBox component', function () {
   })
 
   describe("Toggle options list open/closed when select box is clicked", function () {
-    var selectBoxElement
+    var selectItemElement
 
     beforeEach(function () {
-      selectBoxElement = TestUtils.findRenderedDOMComponentWithClass(
-        selectBox,
+      selectItemElement = TestUtils.findRenderedDOMComponentWithClass(
+        selectItem,
         'react-select-box'
       )
     })
 
     it('should close options list when select box is clicked on (if options list is already open)', function (done) {
       // Start with open options list
-      selectBox.setState({ open: true }, function () {
+      selectItem.setState({ open: true }, function () {
         // Simulate a click on the select box (element with class tag `react-select-box`)
-        TestUtils.Simulate.click(selectBoxElement)
+        TestUtils.Simulate.click(selectItemElement)
         // Re-render component (to ensure state change occured)
-        selectBox.forceUpdate(function () {
+        selectItem.forceUpdate(function () {
           // Check if it is closed
-          selectBox.state.open.should.equal(false)
+          selectItem.state.open.should.equal(false)
           // End test
           done()
         })
@@ -144,13 +146,13 @@ describe('SelectBox component', function () {
 
     it('should open options list when select box is clicked on (if options list is closed)', function (done) {
       // Start with closed options list
-      selectBox.setState({ open: false }, function () {
+      selectItem.setState({ open: false }, function () {
         // Simulate a click on the select box (element with class tag `react-select-box`)
-        TestUtils.Simulate.click(selectBoxElement)
+        TestUtils.Simulate.click(selectItemElement)
         // Re-render component (to ensure state change occured)
-        selectBox.forceUpdate(function () {
+        selectItem.forceUpdate(function () {
           // Check if it is open
-          selectBox.state.open.should.equal(true)
+          selectItem.state.open.should.equal(true)
           // End test
           done()
         })
