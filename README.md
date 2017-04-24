@@ -1,15 +1,109 @@
-# npm Module Starter
+# React Select Item
+### This is a fork from [react-select-box](https://github.com/instructure/react-select-box)
+#### Motivation
+The parent repository does not look like something alive. And i want to continue with react-select-box as alternative project.
 
-This is a simple example of a JavaScript module, using Webpack 2 and Babel to generate a browser compatible UMD version.
+[![Build Status](https://travis-ci.org/BusinessDuck/react-select-item.svg?branch=master)](https://travis-ci.org/BusinessDuck/react-select-item) 
 
-It also uses Jest as unit testing.
+Simple and awesome react select component for rendering Select with options, complete with react ^14.0
+Search inside options supported. Writing by ES2015. 
+
+## [Demo](https://businessduck.github.io/react-select-item/)
 
 ## Installation
 
-```sh
-git clone https://github.com/codeKonami/npm-module-starter.git
-cd npm-module-starter
-npm install
-npm run test # to launch the tests
-npm run build # to build the distro
+```bash
+$ npm install react-select-item --save
+```
+
+## Development
+
+```bash
+$ git clone git@github.com:BusinessDuck/react-select-item.git
+$ npm install
+```
+
+### Run the tests
+
+```bash
+$ npm test
+```
+
+### Start the dev server
+
+```bash
+$ PORT=4000 npm start
+```
+
+Defaults to port `1337` if no port env variable is set.
+
+
+## Example
+
+```javascript
+import React, { PropTypes } from "react";
+import { noop } from "lodash";
+import SelectBox from "react-select-box";
+
+export default class MultiSelectFilter extends React.Component {
+
+  static propTypes = {
+    placeholder: PropTypes.string,
+    isLoading: PropTypes.bool,
+    label: PropTypes.string,
+    value: PropTypes.array,
+    options: [],
+    onChange: PropTypes.fn,
+    className: PropTypes.string,
+    wrapperClassName: PropTypes.string
+  };
+
+  static defaultProps = {
+    placeholder: "",
+    isLoading: false,
+    label: "",
+    value: null,
+    options: [],
+    onChange: noop,
+    className: ""
+  };
+
+  /**
+   * Component constructor
+   * The component is depended from Bootstrap 3.x (styles only)
+   * @param props
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      values: this.props.value
+    };
+  }
+
+  handleMultiChange = (value) => {
+    this.setState({ values: value });
+    this.props.onChange(value);
+  };
+
+  render() {
+    return (
+      <div className={this.props.wrapperClassName}>
+        <div className="form-group">
+          <label>{this.props.label}</label>
+          <SelectBox label={this.props.label}
+                     onChange={this.handleMultiChange}
+                     value={this.state.values}
+                     closeText={false}
+                     className="form-control"
+                     multiple={true}>
+            { this.props.options.map((item, index) => (
+                <option key={index} value={item.value}>{item.name}</option>
+              )
+            )}
+          </SelectBox>
+        </div>
+      </div>
+    );
+  }
+}
 ```
