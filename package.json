@@ -1,26 +1,31 @@
 {
   "name": "react-select-item",
-  "version": "1.2.1",
-  "description": "Easy select component for latest React. With search",
+  "version": "2.0.0",
+  "description": "Easy select component for latest React. With search, writed by ES6.",
   "main": "dist/select-item.js",
   "directories": {
     "test": "test"
-  },
-  "scripts": {
-    "build:windows": "set NODE_ENV=production webpack --config ./webpack.config.js",
-    "build": "NODE_ENV=production webpack --config ./webpack.config.js",
-    "test": "node node_modules/karma/bin/karma start",
-    "start": "gulp serve"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/BusinessDuck/react-select-item.git"
   },
+  "scripts": {
+    "test": "node node_modules/karma/bin/karma start",
+    "build": "webpack",
+    "build:example": "webpack --config ./webpack.config.dev.js",
+    "start": "parallelshell \"webpack --watch\" \"webpack-dev-server\" \"webpack --config ./webpack.config.dev.js --watch\""
+  },
   "keywords": [
-    "react",
     "component",
     "select",
-    "search"
+    "search",
+    "ES6",
+    "ECMAScript 6",
+    "babel",
+    "es2015",
+    "react",
+    "react-select"
   ],
   "author": "Dmitriy Yurov",
   "license": "MIT",
@@ -28,14 +33,21 @@
     "url": "https://github.com/BusinessDuck/react-select-item/issues"
   },
   "homepage": "https://github.com/BusinessDuck/react-select-item",
+  "dependencies": {
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
+  },
   "devDependencies": {
-    "browserify": "^5.9.1",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.4.0",
+    "babel-preset-env": "^1.2.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "chai": "^1.9.1",
-    "gulp": "^3.8.6",
-    "gulp-cached": "^1.0.1",
-    "gulp-connect": "^2.0.6",
-    "gulp-eslint": "^3.0.1",
-    "jsx-loader": "^0.13.2",
+    "copy-webpack-plugin": "^4.0.1",
+    "eslint": "^3.19.0",
     "karma": "^1.6.0",
     "karma-chai": "^0.1.0",
     "karma-firefox-launcher": "^1.0.1",
@@ -43,11 +55,11 @@
     "karma-webpack": "^2.0.3",
     "mocha": "^3.2.0",
     "object-assign": "^4.1.1",
-    "react": "^15.4.2",
+    "parallelshell": "^2.0.0",
     "react-addons-test-utils": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-shallow-testutils": "^2.0.0",
-    "vinyl-source-stream": "^0.1.1",
-    "webpack": "^2.4.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.4",
+    "webpack-hot-middleware": "^2.18.0",
+    "webpack-node-externals": "^1.5.4"
   }
 }

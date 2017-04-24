@@ -12,7 +12,13 @@ module.exports = function (config) {
 		webpack: {
 			cache: true,
 			module: {
-				loaders: []
+				loaders: [
+          {
+            test: /.jsx?$/,
+            loader: 'babel-loader',
+            exclude: [/(node_modules)/],
+          }
+        ]
 			}
 		},
 		webpackServer: {
