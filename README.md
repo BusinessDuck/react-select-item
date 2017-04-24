@@ -29,13 +29,13 @@ $ npm install
 $ npm test
 ```
 
-### Start the dev server
+### Start the dev server (webpack + babel)
 
 ```bash
-$ PORT=4000 npm start
+$ npm start
 ```
 
-Defaults to port `1337` if no port env variable is set.
+Defaults to port `8080`, check the localhost:8080 to view the library usage
 
 
 ## Example
@@ -43,7 +43,7 @@ Defaults to port `1337` if no port env variable is set.
 ```javascript
 import React, { PropTypes } from "react";
 import { noop } from "lodash";
-import SelectBox from "react-select-box";
+import SelectItem from "react-select-item";
 
 export default class MultiSelectFilter extends React.Component {
 
@@ -90,7 +90,7 @@ export default class MultiSelectFilter extends React.Component {
       <div className={this.props.wrapperClassName}>
         <div className="form-group">
           <label>{this.props.label}</label>
-          <SelectBox label={this.props.label}
+          <SelectItem label={this.props.label}
                      onChange={this.handleMultiChange}
                      value={this.state.values}
                      closeText={false}
@@ -100,7 +100,7 @@ export default class MultiSelectFilter extends React.Component {
                 <option key={index} value={item.value}>{item.name}</option>
               )
             )}
-          </SelectBox>
+          </SelectItem>
         </div>
       </div>
     );
