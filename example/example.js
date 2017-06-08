@@ -31,7 +31,7 @@ class Example extends React.Component {
 
   render() {
     const childrens = [
-      { value: 'red', name: 'Red' },
+      { value: 'red', name: 'Red', disabled: true },
       { value: 'orange', name: 'Orange' },
       { value: 'green', name: 'Green' },
       { value: 'black', name: 'Black' },
@@ -82,7 +82,7 @@ class Example extends React.Component {
         <h1>Select Item Example</h1>
         <SelectItem {...select1Props}>
           { childrens.map((item, index) => (
-              <option key={index} value={item.value}>{item.name}</option>
+              <option key={index} value={item.value} disabled={item.disabled}>{item.name}</option>
             )
           )}
         </SelectItem>

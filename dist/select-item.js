@@ -437,10 +437,15 @@ var SelectItem = function (_React$Component) {
       if (_this.isSelected(option.value)) {
         className += ' react-select-box-option-selected';
       }
+      if (option.disabled) {
+        className += ' react-select-box-option-disabled';
+      }
       var aProps = {
         id: _this.state.id + '-' + i,
         href: '#',
-        onClick: _this.handleChange(option.value),
+        onClick: option.disabled ? function () {
+          return null;
+        } : _this.handleChange(option.value),
         onMouseDown: _this.handleMouseDown,
         className: className,
         tabIndex: -1,
@@ -559,7 +564,8 @@ var SelectItem = function (_React$Component) {
       _react2.default.Children.forEach(this.props.children, function (option) {
         options.push({
           value: option.props.value,
-          label: option.props.children
+          label: option.props.children,
+          disabled: !!option.props.disabled
         });
       });
 

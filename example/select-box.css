@@ -153,6 +153,16 @@ input.react-select-box {
   line-height: 1.2;
   text-decoration: none;
 }
+.react-select-box-option-disabled {
+  background: #f9f9f9;
+  color: #d0d0d0;
+}
+
+.react-select-box-option-disabled:hover {
+  background: #f9f9f9;
+  color: #d0d0d0 !important;
+  cursor: default !important;
+}
 
 .react-select-box-option:hover {
   color: #0493D1;
