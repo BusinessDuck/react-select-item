@@ -1,6 +1,6 @@
 {
   "name": "react-select-item",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Easy select component for latest React. With search, writed by ES6.",
   "main": "dist/select-item.js",
   "directories": {
