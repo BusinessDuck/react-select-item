@@ -10,7 +10,7 @@ module.exports = function (config) {
       'test/**/*spec.js': [ 'webpack' ]
     },
     webpack: {
-      entry: './lib/select-item.js',
+      entry: './src/select-item.js',
       output: {
         libraryTarget: 'umd',
         library: 'select-item'
@@ -21,7 +21,18 @@ module.exports = function (config) {
             test: /.jsx?$/,
             loader: 'babel-loader',
             exclude: [ 'node_modules' ],
-          }
+          },
+          {
+            test: /(\.css|\.scss|\.sass)$/,
+            loaders: ['style-loader', 'css-loader?sourceMap', {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [require('autoprefixer')],
+                sourceMap: 'inline'
+              }
+            }, 'resolve-url-loader']
+          },
+          { test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]' },
         ]
       }
     },
