@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/BusinessDuck/react-select-item",
   "dependencies": {
+    "daemon": "github:zipang/daemon.node#48d0977c26fb3a6a44ae99aae3471b9d5a761085",
     "react": "^15.0.0",
     "react-dom": "^15.0.0"
   },
