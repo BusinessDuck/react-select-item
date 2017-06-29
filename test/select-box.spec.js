@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectItemComponent from '../lib/select-item';
+import SelectItemComponent from '../src/select-item';
 import TestUtils from 'react-addons-test-utils';
 import objectAssign from 'object-assign';
 

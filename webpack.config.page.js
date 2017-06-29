@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const SRC = path.resolve(__dirname, './example');
-const DIST = path.resolve(__dirname, './build');
+const DIST = path.resolve(__dirname, './gh-page');
 
 module.exports ={
   devServer: {
@@ -22,10 +22,9 @@ module.exports ={
       'node_modules'
     ]
   },
-  devtool: 'source-map',
+  devtool: 'nosources-source-map',
   entry: [
     'babel-polyfill',
-    'webpack-hot-middleware/client?reload=true',
     `${SRC}/example.js`
   ],
   target: 'web',
@@ -35,7 +34,6 @@ module.exports ={
     filename: 'example.js'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: false,

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SelectItem from "../dist/select-item";
+import SelectItem from "../src/select-item";
 
 class Example extends React.Component {
   constructor(props) {

@@ -22,7 +22,7 @@ input.react-select-item {
   box-sizing: border-box;
   padding-left: 15px;
   color: #7B8E9B;
-  background: url('search-icon.png') no-repeat scroll 9px 15px;
+  background: url('assets/search-icon.png') no-repeat scroll 9px 15px;
   padding-left: 30px;
 }
 
