@@ -67,7 +67,7 @@ export default class SelectItem extends React.Component {
   };
 
   handleSearchBlur = () => {
-    let menuNode = ReactDOM.findDOMNode(this.refs.menu);
+    let menuNode = ReactDOM.findDOMNode(this.menuRef);
     this.setState({ searchVisible: false });
     if (document.hasFocus(menuNode)) {
       return this.handleClose();
@@ -107,7 +107,7 @@ export default class SelectItem extends React.Component {
         this.updatePendingValue(val, cb) || this.props.onChange(val);
         this.handleClose();
         if (!this.state.searchEnabled) {
-          this.refs.button.focus()
+          this.buttonRef.focus()
         }
       }
     }
@@ -150,9 +150,9 @@ export default class SelectItem extends React.Component {
     interceptEvent(event);
     this.setState({ open: true, searchVisible: this.state.searchEnabled }, function () {
       if (this.state.searchEnabled) {
-        this.refs.searchInput.focus();
+        this.searchInputRef.focus();
       } else {
-        this.refs.menu.focus()
+        this.menuRef.focus()
       }
     })
   };
@@ -334,7 +334,7 @@ export default class SelectItem extends React.Component {
 
     const buttonProps = {
       id: this.state.id,
-      ref: 'button',
+      ref: ref => this.buttonRef = ref,
       className: 'react-select-item',
       onClick: this.toggleOpenClose,
       onBlur: this.handleBlur,
@@ -358,7 +358,7 @@ export default class SelectItem extends React.Component {
 
     const buttonProps = {
       id: this.state.id,
-      ref: 'button',
+      ref: ref => this.buttonRef = ref,
       className: 'react-select-item',
       onClick: this.handleOpen,
       onBlur: this.handleBlur,
@@ -378,7 +378,7 @@ export default class SelectItem extends React.Component {
   renderSearchInput = () => {
     const inputProps = {
       id: this.state.id + '-search',
-      ref: "searchInput",
+      ref: ref => this.searchInputRef = ref,
       value: this.state.searchText,
       className: 'react-select-item',
       onFocus: this.handleFocus(),
@@ -407,7 +407,7 @@ export default class SelectItem extends React.Component {
       onBlur: this.handleBlur,
       onFocus: this.handleFocus,
       'aria-hidden': true,
-      ref: 'menu',
+      ref: ref => this.menuRef = ref,
       tabIndex: 0
     };
 
