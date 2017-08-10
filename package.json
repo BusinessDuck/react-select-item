@@ -1,6 +1,6 @@
 {
   "name": "react-select-item",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Easy select component for latest React. With search, writed by ES6.",
   "main": "dist/select-item.js",
   "directories": {
@@ -11,7 +11,7 @@
     "url": "https://github.com/BusinessDuck/react-select-item.git"
   },
   "scripts": {
-    "test": "node node_modules/karma/bin/karma start",
+    "test": "node node_nmodules/karma/bin/karma start",
     "start": "npm run build:dev",
     "build:prod": "webpack",
     "build:serve": "webpack-dev-server --config ./webpack.config.dev.js",
