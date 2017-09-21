@@ -1,0 +1,259 @@
+$text-color: #3A3A3A;
+$text-color-light: #CECECE;
+$text-hover-color: #fff;
+$text-disabled-color: #fff;
+$border-color: #CBD2D7;
+$border-color-dark: #7B8E9B;
+$border-color-light: #F9F9F9;
+
+$option-text-color: $border-color-dark;
+$option-default-color: #fff;
+$option-disabled-color: #fff;
+$option-hover-color: #f4f4f4;
+$option-selected-color: #00A3D7;
+$option-selected-hover-color: #00A3D7;
+
+.react-select-item-container {
+  position: relative;
+  width: 240px;
+  display: inline-block;
+  background-color: #fff;
+  text-align: left;
+}
+
+.react-select-item {
+  padding: 12px 0;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: left;
+  background-color: transparent;
+}
+
+.react-select-item-options-search {
+  padding: 18px 20px;
+  display: inline-block;
+  width: 100%;
+  height: 20px;
+  &:focus {
+    outline: none;
+  }
+  box-sizing: border-box;
+  background: url('assets/search-icon.png') no-repeat scroll 3px 12px;
+  border: 1px solid rgba(157, 157, 157, 0.79);
+  border-left: 0;
+  border-right: 0;
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $text-color-light;
+  }
+  font-size: 12px;
+  font-weight: bold;
+  color: $border-color-dark;
+}
+
+.react-select-item:focus {
+  outline: 0;
+}
+
+.react-select-item:before {
+  content: ' ';
+  z-index: 1;
+  position: absolute;
+  height: 20px;
+  top: 10px;
+  right: 34px;
+  border-left: 1px solid $border-color;
+}
+
+.react-select-item:after {
+  content: ' ';
+  position: absolute;
+  z-index: 1;
+  top: 18px;
+  right: 13px;
+  border-top: 6px solid $border-color-dark;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+
+.react-select-item-label,
+.react-select-item-option {
+  line-height: 16px;
+  font-size: 12px;
+  font-weight: bold;
+  color: $border-color-dark;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.react-select-item-label {
+  padding: 0 40px 0 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.react-select-item-empty .react-select-item-label {
+  color: $text-color-light;
+}
+
+.react-select-item-clear {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  width: 35px;
+  height: 20px;
+  background-color: #fff;
+  text-indent: -9999em;
+  z-index: 3;
+  border: none;
+  color: $text-hover-color;
+}
+
+.react-select-item-clear:before {
+  content: '×';
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  z-index: 1;
+  background-color: $border-color-dark;
+  border-radius: 100%;
+  font-size: 13px;
+  line-height: 1.1;
+  width: 14px;
+  height: 14px;
+  text-indent: 0;
+  text-align: center;
+}
+
+.react-select-item-clear:hover,
+.react-select-item-clear:focus {
+  outline: 0;
+  cursor: pointer;
+}
+.react-select-item-clear:focus:hover:before,
+.react-select-item-clear:hover:before {
+  background-color: $option-selected-color;
+}
+
+.react-select-item-clear:focus:before {
+  background-color: $border-color-dark;
+}
+
+.react-select-item-hidden {
+  display: none
+}
+
+.react-select-item-options {
+  &:focus {
+    outline: none;
+  }
+  position: absolute;
+  padding: 0;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+  background-color: #fff;
+  border-top: 1px solid $border-color;
+}
+
+.react-select-item-options-list {
+  list-style: none outside;
+  margin: 0;
+  padding: 0;
+}
+
+.react-select-item-option {
+  padding: 10px 20px;
+  margin: 0;
+  cursor: pointer;
+  display: block;
+  line-height: 1.2;
+  text-decoration: none;
+  border-bottom: 1px solid $border-color-light;
+}
+.react-select-item-option-disabled {
+  background: $option-disabled-color;
+  color: $text-disabled-color;
+}
+
+.react-select-item-option-disabled:hover {
+  background: $option-disabled-color;
+  color: $text-disabled-color !important;
+  cursor: default !important;
+}
+
+.react-select-item-option:hover {
+  color: $text-color;
+  background-color: $option-hover-color;
+  text-decoration: none;
+}
+
+.react-select-item-option-selected {
+  color: $text-hover-color !important;
+  background-color: $option-selected-color;
+  &:hover {
+    background-color: $option-selected-hover-color;
+  }
+}
+
+.react-select-item-multi .react-select-item-option {
+  padding-left: 42px;
+  position: relative;
+}
+
+.react-select-item-multi .react-select-item-option:before {
+  content: ' ';
+  position: absolute;
+  line-height: 1;
+  text-align: center;
+  left: 20px;
+  top: 9px;
+  border-radius: 3px;
+  height: 12px;
+  width: 12px;
+  margin-right: 10px;
+  border: 1px solid $border-color-dark;
+  background: #f9f9f9;
+  vertical-align: middle;
+}
+
+// todo implement keys moves highlighting
+.react-select-item-option:focus,
+.react-select-item-option-focused {
+//  color: $option-selected-color;
+  outline: 0;
+  text-decoration: none;
+  color: $option-text-color;
+}
+
+.react-select-item-close {
+  text-transform: uppercase;
+  background-color: transparent;
+  border: none;
+  padding: 5px 0;
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+.react-select-item-empty .react-select-item-close {
+  color: $border-color;
+}
+
+.react-select-item-native {
+  position: absolute;
+  left: -99999em;
+}
+
+.react-select-item-off-screen.no-items {
+  padding: 10px 20px;
+  font-size: 12px;
+  color: $border-color-dark;
+  font-weight: bold;
+}
