@@ -13,6 +13,8 @@ $option-hover-color: #f4f4f4;
 $option-selected-color: #00A3D7;
 $option-selected-hover-color: #00A3D7;
 
+$highlighter-color: #ACC1C8;
+
 .react-select-item-container {
   position: relative;
   width: 240px;
@@ -85,6 +87,9 @@ $option-selected-hover-color: #00A3D7;
   color: $border-color-dark;
   text-overflow: ellipsis;
   overflow: hidden;
+  .highlighter {
+    background-color: $highlighter-color;
+  }
 }
 
 .react-select-item-label {
