@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES5",
+        "target": "ES6",
         "module": "commonjs",
         "moduleResolution": "node",
         "isolatedModules": false,
@@ -16,6 +16,7 @@
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true,
         "lib": ["ES5","ScriptHost", "DOM","ES7"],
+        "allowJs": true,
         "importHelpers": true,
         "baseUrl": "./"
     },

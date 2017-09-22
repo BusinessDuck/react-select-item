@@ -1,6 +1,5 @@
 const {
     FuseBox,
-    TypeScriptHelpers,
     SassPlugin,
     CSSPlugin,
     WebIndexPlugin,
@@ -15,7 +14,7 @@ const pkg = require('./package.json');
 const TypeHelper = require('fuse-box-typechecker').TypeHelper;
 // Async check (worker)
 const testAsync = TypeHelper({
-    tsConfig: './tsconfig.json',
+    tsConfig: 'tsconfig.json',
     basePath:'./src',
     name: 'Test async'
 });
@@ -23,14 +22,18 @@ const { runCLI } = require("jest");
 
 let fuse, app, vendor, isProduction;
 
-Sparky.task("config", () => {
+Sparky.task("config-dev", () => {
     fuse = FuseBox.init({
         homeDir: "src",
+        tsConfig: "src/tsconfig.json",
         output: "dist/$name.js",
-        tsConfig: "tsconfig.json",
-        useJsNext : ["react", "react-dom"],
-        polyfillNonStandardDefaultUsage : ["react", "react-dom"],
-        sourceMaps: !isProduction,
+        package: {
+            name: 'react-select-item',
+            main: 'src/index.ts'
+        },
+        globals: { "react-select-item": "*" },
+        // globals: { default: "react-select-item" },
+        sourceMaps: true,
         plugins: [
             [
                 SassPlugin(),
@@ -40,22 +43,37 @@ Sparky.task("config", () => {
                 }),
                 CSSPlugin()
             ],
-            TypeScriptHelpers(),
-            WebIndexPlugin({
-                template: "src/index.html",
-                title: "React + TypeScript example",
-                target: "index.html"
-            }),
             isProduction && QuantumPlugin({
-                bakeApiIntoBundle : 'vendor',
-                treeshake : true,
-                uglify: true,
+                target: 'npm',
+                bakeApiIntoBundle : 'react-select-item',
+                uglify: false,
             })
         ]
     });
 
-    vendor = fuse.bundle("vendor").instructions("~/application.tsx");
-    app = fuse.bundle("app").instructions(" !> [development.tsx]");
+    app = fuse.bundle("react-select-item").instructions("> index.ts");
+    testAsync.runAsync();
+});
+
+Sparky.task("config-example", () => {
+    fuse = FuseBox.init({
+        homeDir: "example",
+        tsConfig: "example/tsconfig.json",
+        output: "build/$name.js",
+        sourceMaps: true,
+        useJsNext : ["react", "react-dom"],
+        polyfillNonStandardDefaultUsage : ["react", "react-dom"],
+        plugins: [
+            WebIndexPlugin({
+                template: "example/index.html",
+                title: "RSI example",
+                target: "index.html"
+            })
+        ]
+    });
+
+    vendor = fuse.bundle("vendor").instructions("~/example.tsx");
+    app = fuse.bundle("app").instructions(" > example.tsx");
     testAsync.runAsync();
 });
 
@@ -63,9 +81,18 @@ Sparky.task("check-updates", () => {
     updateNotifier({pkg}).notify();
 });
 
-Sparky.task("default", ["clean", "config", "check-updates", "tests"], () => {
+Sparky.task("default", ["clean", "config-dev", "check-updates", "tests"], () => {
     fuse.dev({
         root: "dist"
+    });
+    // add dev instructions
+    app.watch().hmr();
+    return fuse.run();
+});
+
+Sparky.task("example", ["clean-example", "config-example"], () => {
+    fuse.dev({
+        root: "build"
     });
     // add dev instructions
     app.watch().hmr();
@@ -78,13 +105,15 @@ Sparky.task("tests", () => {
 
 Sparky.task("clean", () => Sparky.src("dist/").clean("dist/"));
 
+Sparky.task("clean-example", () => Sparky.src("build/").clean("build/"));
+
 Sparky.task("prod-env", ["clean"], () => {
     isProduction = true
 });
 
-Sparky.task("dist", ["prod-env", "config"], () => {
+Sparky.task("dist", ["prod-env", "config-dev"], () => {
     // comment out to prevent dev server from running (left for the demo)
-    fuse.dev();
+    // fuse.dev();
     return fuse.run();
 });
 

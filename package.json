@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "node fuse",
     "build": "node fuse dist",
+    "example": "node fuse example",
     "test": "node fuse tests"
   },
   "repository": {
@@ -24,23 +25,23 @@
     "@types/node": "^8.0.26",
     "@types/react": "^16.0.5",
     "enzyme": "^2.9.1",
-    "fuse-box": "^2.2.2",
+    "fuse-box": "^2.2.31",
     "fuse-box-typechecker": "git://github.com/fuse-box/fuse-box-typechecker.git",
     "jest": "^20.0.4",
     "node-sass": "^4.5.3",
+    "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
     "run-sequence": "^2.1.0",
     "ts-jest": "^20.0.13",
+    "tslib": "^1.7.1",
     "tslint": "^5.7.0",
     "typescript": "^2.4.2",
     "uglify-js": "^3.0.28",
-    "update-notifier": "^2.2.0",
-    "classnames": "^2.2.5"
+    "update-notifier": "^2.2.0"
   },
   "dependencies": {
-    "app-root-path": "^2.0.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "classnames": "^2.2.5",
+    "react": "^15.6.1"
   },
   "jest": {
     "transform": {

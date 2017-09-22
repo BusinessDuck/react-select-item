@@ -52,8 +52,8 @@ export namespace RSI {
             value: [],
         };
 
-        public buttonRef: React.DOMElement<any, any>;
-        public menuRef: React.DOMElement<any, any>;
+        public buttonRef: HTMLInputElement;
+        public menuRef: HTMLInputElement;
         private listenerActive: boolean = false;
 
         /**
