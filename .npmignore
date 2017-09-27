@@ -1,8 +1,12 @@
-examples
-test
+example
+.fusebox
 karma.conf.js
-webpack.*
+fuse.js
 build
 *.yml
 .idea
 *.log
+tsconfig.json
+tslint.json
+.npmignore
+urils

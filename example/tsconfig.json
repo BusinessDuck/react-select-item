@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "outDir": "./build",
+        "target": "ES5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "isolatedModules": false,
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "noImplicitAny": false,
+        "noImplicitUseStrict": false,
+        "removeComments": true,
+        "noLib": false,
+        "noEmitHelpers": true,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "lib": ["DOM","ES7"],
+        "importHelpers": true,
+        "allowJs": true
+    },
+    "exclude": [],
+    "compileOnSave": false,
+    "buildOnSave": false,
+    "atom": {
+        "rewriteTsconfig": false
+    }
+}
