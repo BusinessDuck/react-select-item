@@ -1,14 +1,22 @@
 # React Select Item
-### This is a fork from [react-select-box](https://github.com/instructure/react-select-box)
-#### Motivation
-The parent repository does not look like something alive. And i want to continue with react-select-box as alternative project.
 
 [![Build Status](https://travis-ci.org/BusinessDuck/react-select-item.svg?branch=master)](https://travis-ci.org/BusinessDuck/react-select-item) [![npm version](https://badge.fury.io/js/react-select-item.svg)](https://badge.fury.io/js/react-select-item) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MN45NZ5YF3NZ4) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 Simple and awesome react select component for rendering Select with options, complete with react ^14.0
 Search inside options supported. Writing by ES2015. 
 
+## Version 3 released [CHANGELOG](./Changelog.md)
+
 ## [Demo](https://businessduck.github.io/react-select-item/)
+
+### Migration from 2.x versions
+
+```
+1. DOM stricture was changed! If you have the dom depended staff, you need fix it
+2. Change you onClick handler argument onClick(value: Array) => {} value is array every time now
+3. Change value input prop - <SelectItem value={myValue: Array} /> value is array now
+4. Search not will be able until flag search is false, if you using the filterFn - set up search to true
+```
 
 ## Installation
 
@@ -29,13 +37,14 @@ $ npm install
 $ npm test
 ```
 
-### Start the dev server (webpack + babel)
+### Start the dev server
 
 ```bash
-$ npm start
+$ npm run dev
+$ npm run example
 ```
 
-Defaults to port `8080`, check the localhost:8080 to view the library usage
+Defaults to port `4444`, check the localhost:4444 to view the library usage
 
 
 ## Example
@@ -62,7 +71,7 @@ export default class MultiSelectFilter extends React.Component {
     placeholder: "",
     isLoading: false,
     label: "",
-    value: null,
+    value: [],
     options: [],
     onChange: noop,
     className: ""
