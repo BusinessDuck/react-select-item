@@ -1,0 +1,210 @@
+body {
+  font-family: sans-serif;
+  background-color: #363636;
+  text-align: center;
+  margin-top: 100px;
+}
+
+h1 {
+  font-size: 24px;
+  color: #aaa;
+}
+
+
+@charset "UTF-8";
+.react-select-item-container {
+  position: relative;
+  width: 240px;
+  display: inline-block;
+  background-color: #fff;
+  text-align: left; }
+
+.react-select-item {
+  padding: 12px 0;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: left;
+  background-color: transparent; }
+
+.react-select-item-options-search {
+  padding: 18px 20px;
+  display: inline-block;
+  width: 100%;
+  height: 20px;
+  box-sizing: border-box;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkZFMDk0RTNFNUZBMzExRTBBM0YxRERGQ0FERjBCN0FEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkZFMDk0RTNGNUZBMzExRTBBM0YxRERGQ0FERjBCN0FEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkUwOTRFM0M1RkEzMTFFMEEzRjFEREZDQURGMEI3QUQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkUwOTRFM0Q1RkEzMTFFMEEzRjFEREZDQURGMEI3QUQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6hWFpuAAAAMFBMVEXY2Nh3d3eLi4uoqKjOzs6enp7s7OyVlZXFxcWxsbHi4uKBgYFubm719fVkZGT///8UZAOpAAAAXUlEQVR42kSMWxKAMAgDqdoHLST3v62pjuN+0CydYNwM95GkKeaCKPORiji9YG1JYGoGTGLaPf8umQiVuTB2J9BbViCNeeBl0Pbd6MC61NYbky92/JnWvH2ZtwADABv4BwVV063mAAAAAElFTkSuQmCC") no-repeat scroll 3px 12px;
+  border: 1px solid rgba(157, 157, 157, 0.79);
+  border-left: 0;
+  border-right: 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #7B8E9B; }
+  .react-select-item-options-search:focus {
+    outline: none; }
+  .react-select-item-options-search::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #CECECE; }
+
+.react-select-item:focus {
+  outline: 0; }
+
+.react-select-item:before {
+  content: ' ';
+  z-index: 1;
+  position: absolute;
+  height: 20px;
+  top: 10px;
+  right: 34px;
+  border-left: 1px solid #CBD2D7; }
+
+.react-select-item:after {
+  content: ' ';
+  position: absolute;
+  z-index: 1;
+  top: 18px;
+  right: 13px;
+  border-top: 6px solid #7B8E9B;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent; }
+
+.react-select-item-label,
+.react-select-item-option {
+  line-height: 16px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #7B8E9B;
+  text-overflow: ellipsis;
+  overflow: hidden; }
+  .react-select-item-label .highlighter,
+  .react-select-item-option .highlighter {
+    background-color: #ACC1C8; }
+
+.react-select-item-label {
+  padding: 0 40px 0 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.react-select-item-empty .react-select-item-label {
+  color: #CECECE; }
+
+.react-select-item-clear {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  width: 35px;
+  height: 20px;
+  background-color: #fff;
+  text-indent: -9999em;
+  z-index: 3;
+  border: none;
+  color: #fff; }
+
+.react-select-item-clear:before {
+  content: '×';
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  z-index: 1;
+  background-color: #7B8E9B;
+  border-radius: 100%;
+  font-size: 13px;
+  line-height: 1.1;
+  width: 14px;
+  height: 14px;
+  text-indent: 0;
+  text-align: center; }
+
+.react-select-item-clear:hover,
+.react-select-item-clear:focus {
+  outline: 0;
+  cursor: pointer; }
+
+.react-select-item-clear:focus:hover:before,
+.react-select-item-clear:hover:before {
+  background-color: #00A3D7; }
+
+.react-select-item-clear:focus:before {
+  background-color: #7B8E9B; }
+
+.react-select-item-hidden {
+  display: none; }
+
+.react-select-item-options {
+  position: absolute;
+  padding: 0;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+  background-color: #fff;
+  border-top: 1px solid #CBD2D7; }
+  .react-select-item-options:focus {
+    outline: none; }
+
+.react-select-item-options-list {
+  list-style: none outside;
+  margin: 0;
+  padding: 0; }
+
+.react-select-item-option {
+  padding: 10px 20px;
+  margin: 0;
+  cursor: pointer;
+  display: block;
+  line-height: 1.2;
+  text-decoration: none;
+  border-bottom: 1px solid #F9F9F9; }
+  .react-select-item-option:hover {
+    color: #3A3A3A;
+    background-color: #f4f4f4;
+    text-decoration: none; }
+  .react-select-item-option:focus {
+    outline: 0;
+    text-decoration: none;
+    color: #7B8E9B; }
+  .react-select-item-option-selected {
+    color: #fff !important;
+    background-color: #00A3D7; }
+    .react-select-item-option-selected:hover {
+      background-color: #00A3D7; }
+  .react-select-item-option-disabled {
+    background: #c4c4c4;
+    color: #fff; }
+    .react-select-item-option-disabled:focus {
+      color: #fff; }
+  .react-select-item-option-disabled:hover {
+    background: #bebebe;
+    color: #fff;
+    cursor: not-allowed; }
+
+.react-select-item-close {
+  text-transform: uppercase;
+  background-color: transparent;
+  border: none;
+  padding: 5px 0;
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none; }
+
+.react-select-item-empty .react-select-item-close {
+  color: #CBD2D7; }
+
+.react-select-item-native {
+  position: absolute;
+  left: -99999em; }
+
+.react-select-item-off-screen.no-items {
+  padding: 10px 20px;
+  font-size: 12px;
+  color: #7B8E9B;
+  font-weight: bold; }
+
+/*# sourceMappingURL=styles.scss.map */
+/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=styles.css.map */
