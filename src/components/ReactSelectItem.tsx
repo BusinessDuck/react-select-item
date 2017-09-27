@@ -1,7 +1,7 @@
 import * as classNames from "classnames/bind";
 import * as React from "react";
 
-// import "./styles.scss";
+import "./styles.scss";
 
 export interface IProps {
     label?: string;

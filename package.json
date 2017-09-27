@@ -1,18 +1,18 @@
 {
-  "name": "react-ts-fuse-example",
-  "version": "1.0.0",
-  "description": "React, TypeScript, Fuse-Box Starter / Boilerplate / Seed",
-  "main": "gulpfile.js",
+  "name": "react-select-item",
+  "version": "3.0.0",
+  "description": "Easy select component for latest React. With search, writed by ES6.",
+  "main": "dist/select-item.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BusinessDuck/react-select-item.git"
+  },
   "scripts": {
     "build": "node fuse dist",
     "dev": "node fuse",
     "example": "node fuse example",
     "test": "node fuse tests",
     "test:watch": "node fuse tests:watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fuse-box/fuse-box-examples/react-typescript"
   },
   "author": "Dmitriy Yurov",
   "license": "ISC",

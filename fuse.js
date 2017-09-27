@@ -28,7 +28,6 @@ let fuse, app, vendor, isProduction;
 
 Sparky.task("config-dev", () => {
     const dist = isProduction ? "dist" : "example/dist";
-
     fuse = FuseBox.init({
         // alias: { 'react': 'preact-compact',  'react-dom': 'preact-compact' },
         homeDir: "src",
