@@ -17,6 +17,27 @@ Search inside options supported. Writing by ES2015.
 3. Change value input prop - <SelectItem value={myValue: Array} /> value is array now
 4. Search not will be able until flag search is false, if you using the filterFn - set up search to true
 ```
+### The Webpack Issues
+if you see in console
+
+```javascript
+react-select-item.js:3 Uncaught Error: Cannot find module "."
+    at webpackMissingModule (react-select-item.js:3)
+    at react-select-item.js:3
+
+```
+OR
+```
+WARNING in ./~/react-select-item/dist/react-select-item.js
+3:25-32 Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+```
+
+You need to add to webpack plugins:
+
+` new webpack.ContextReplacementPlugin(/react-select-item/, 'react-select-item.js'), `
+
+its temporary solution, will be don't need in next version
+
 
 ## Installation
 

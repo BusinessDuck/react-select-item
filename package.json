@@ -1,8 +1,8 @@
 {
   "name": "react-select-item",
-  "version": "3.0.0",
+  "version": "3.0.0g",
   "description": "Easy select component for latest React. With search, writed by ES6.",
-  "main": "dist/select-item.js",
+  "main": "dist/react-select-item.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/BusinessDuck/react-select-item.git"

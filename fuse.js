@@ -50,13 +50,12 @@ Sparky.task("config-dev", () => {
             QuantumPlugin({
                 target: 'npm',
                 bakeApiIntoBundle : 'react-select-item',
-                uglify: false,
-                removeExportsInterop: true
+                uglify: false
             })
         ]
     });
 
-    app = fuse.bundle("react-select-item").instructions("!> [index.ts]");
+    app = fuse.bundle("react-select-item").instructions("> [index.ts] + tslib + fuse-box-css");
     testAsync.runAsync();
 });
 
