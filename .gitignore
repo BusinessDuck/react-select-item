@@ -1,8 +1,5 @@
-.DS_Store
-node_modules
-npm-debug.log
-tmp
-build
-gh-page
-dist
 .idea
+node_modules
+.fusebox
+dist
+build
