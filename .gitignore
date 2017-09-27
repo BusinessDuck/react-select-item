@@ -3,3 +3,5 @@ node_modules
 .fusebox
 dist
 build
+example/dist
+npm-debug.log
