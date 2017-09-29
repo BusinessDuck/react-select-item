@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.0.5] - 2017-09-29
+### Changes
+- Removed webpack global.require issue
+- FuseBox dev dependency updated
+
+## [3.0.1 - 3.0.4] - 2017-09-28
+### Missed builds
+
 ## [3.0.0] - 2017-09-27
 ### Changes
 - Changelog document.

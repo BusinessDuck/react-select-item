@@ -5,7 +5,7 @@
 Simple and awesome react select component for rendering Select with options, complete with react ^14.0
 Search inside options supported. Writing by ES2015. 
 
-## Version 3 released [CHANGELOG](./Changelog.md)
+## Version 3.0.5 released [CHANGELOG](./Changelog.md)
 
 ## [Demo](https://businessduck.github.io/react-select-item/)
 
@@ -16,28 +16,9 @@ Search inside options supported. Writing by ES2015.
 2. Change you onClick handler argument onClick(value: Array) => {} value is array every time now
 3. Change value input prop - <SelectItem value={myValue: Array} /> value is array now
 4. Search not will be able until flag search is false, if you using the filterFn - set up search to true
+5. Import default deprecated, ise target import {SelectItem} instead of * as Select item
+6. CSS styles location change 'react-select-item/dist/styles.css' instead of 'react-select-item/src/...'
 ```
-### The Webpack Issues
-if you see in console
-
-```javascript
-react-select-item.js:3 Uncaught Error: Cannot find module "."
-    at webpackMissingModule (react-select-item.js:3)
-    at react-select-item.js:3
-
-```
-OR
-```
-WARNING in ./~/react-select-item/dist/react-select-item.js
-3:25-32 Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
-```
-
-You need to add to webpack plugins:
-
-` new webpack.ContextReplacementPlugin(/react-select-item/, 'react-select-item.js'), `
-
-its temporary solution, will be don't need in next version
-
 
 ## Installation
 
