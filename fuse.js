@@ -49,6 +49,7 @@ Sparky.task("config-dev", () => {
             ],
             QuantumPlugin({
                 target: 'npm',
+                globalRequire: false,
                 bakeApiIntoBundle : 'react-select-item',
                 uglify: false
             })
