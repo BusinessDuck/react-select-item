@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.0.6] - 2017-10-02
+## Changes
+- Component migrated from uncontrolled to controlled
+- Added closeOnChange bool flag in props
+
 ## [3.0.5] - 2017-09-29
 ### Changes
 - Removed webpack global.require issue
