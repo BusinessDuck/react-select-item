@@ -1,82 +1,84 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
-import { SelectItem }  from "./dist/react-select-item.js";
-import "./example.css";
+import { SelectItem } from "./dist/react-select-item.js";
 import "./dist/styles.css";
+import "./example.css";
 
 class Example extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
             color: [],
-            searchColor: [],
             colors: [],
-            searchColors: []
+            searchColor: [],
+            searchColors: [],
         };
     }
 
-    handleChange = (color) => {
-        this.setState({color: color})
-    };
+    public handleChange = (color) => {
+        this.setState({color});
+    }
 
-    handleMultiChange = (colors) => {
-        this.setState({colors: colors})
-    };
+    public handleMultiChange = (colors) => {
+        this.setState({colors});
+    }
 
-    handleSingleSearchChange = (color) => {
-        this.setState({searchColor: color})
-    };
+    public handleSingleSearchChange = (color) => {
+        this.setState({searchColor: color});
+    }
 
-    handleMultiSearchChange = (colors) => {
-        this.setState({searchColors: colors})
-    };
+    public handleMultiSearchChange = (colors) => {
+        this.setState({searchColors: colors});
+    }
 
-    render() {
+    public render() {
         const childrens = [
-            {value: 'red', name: 'Red', disabled: true},
-            {value: 'orange', name: 'Orange'},
-            {value: 'green', name: 'Green'},
-            {value: 'black', name: 'Black'},
-            {value: 'yellow', name: 'Yellow'},
-            {value: 'purple', name: 'Purple'},
-            {value: 'greenish', name: 'Light greenish with a little bit of yellow'}
+            {value: "red", name: "Red", disabled: true},
+            {value: "orange", name: "Orange"},
+            {value: "green", name: "Green"},
+            {value: "black", name: "Black"},
+            {value: "yellow", name: "Yellow"},
+            {value: "purple", name: "Purple"},
+            {value: "greenish", name: "Light greenish with a little bit of yellow"},
         ];
 
         const select1Props = {
+            className: "my-example-select-box",
+            closeOnChange: true,
             label: "Favorite Color",
-            className: 'my-example-select-box',
             onChange: this.handleChange,
-            value: this.state.color
+            open: this.state.open,
+            value: this.state.color,
         };
 
         const select2Props = {
+            className: "my-example-select-box",
             label: "Favorite Color",
-            className: 'my-example-select-box',
-            onChange: this.handleSingleSearchChange,
-            value: this.state.searchColor,
             noItemsText: "No items found",
+            onChange: this.handleSingleSearchChange,
             search: true,
-            filterFn: function (text, item) {
-                return item.label.indexOf(text) !== -1
+            value: this.state.searchColor,
+            filterFn(text, item) {
+                return item.label.indexOf(text) !== -1;
             },
         };
 
         const select3Props = {
             label: "Favorite Colors",
+            multiple: true,
             onChange: this.handleMultiChange,
             value: this.state.colors,
-            multiple: true
         };
 
         const select4Props = {
             label: "Favorite Colors",
-            onChange: this.handleMultiSearchChange,
-            value: this.state.searchColors,
             multiple: true,
             noItemsText: "No items found",
+            onChange: this.handleMultiSearchChange,
             search: true,
-            filterFn: function (text, item) {
-                return item.label.indexOf(text) !== -1
+            value: this.state.searchColors,
+            filterFn(text, item) {
+                return item.label.indexOf(text) !== -1;
             },
 
         };
@@ -86,8 +88,8 @@ class Example extends React.Component<any, any> {
                 <h1>Select Item Example</h1>
                 <SelectItem {...select1Props}>
                     {childrens.map((item, index) => (
-                            <option key={index} value={item.value} disabled={item.disabled}>{item.name}</option>
-                        )
+                            <option key={index} value={item.value} disabled={item.disabled}>{item.name}</option> // tslint:disable-line
+                        ),
                     )}
                 </SelectItem>
 
@@ -95,7 +97,7 @@ class Example extends React.Component<any, any> {
                 <SelectItem {...select2Props}>
                     {childrens.map((item, index) => (
                             <option key={index} value={item.value}>{item.name}</option>
-                        )
+                        ),
                     )}
                 </SelectItem>
 
@@ -103,7 +105,7 @@ class Example extends React.Component<any, any> {
                 <SelectItem {...select3Props}>
                     {childrens.map((item, index) => (
                             <option key={index} value={item.value}>{item.name}</option>
-                        )
+                        ),
                     )}
                 </SelectItem>
 
@@ -111,15 +113,15 @@ class Example extends React.Component<any, any> {
                 <SelectItem {...select4Props}>
                     {childrens.map((item, index) => (
                             <option key={index} value={item.value}>{item.name}</option>
-                        )
+                        ),
                     )}
                 </SelectItem>
             </div>
-        )
+        );
     }
 }
 
 ReactDOM.render(
     <Example/>,
-    document.getElementById('container')
+    document.getElementById("container"),
 );

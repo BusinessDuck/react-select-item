@@ -4,12 +4,13 @@ import * as React from "react";
 import "./styles.scss";
 
 export interface IProps {
+    closeOnChange?: boolean;
     label?: string;
     value?: any[];
-    defaultValue?: any[];
     onChange: any;
     filterFn: any;
     search: boolean;
+    searchText?: string;
     multiple: boolean;
     noItemsText?: string;
     searchPlaceholder?: string;
@@ -39,10 +40,10 @@ export class Component extends React.Component<IProps, IState> {
         clearText: "Remove selection",
         filterFn: () => null,
         multiple: false,
+        noItemsText: "No items found",
         onChange: () => null,
         search: false,
         searchPlaceholder: "Search...",
-        noItemsText: "No items found",
     };
 
     public state: IState = {
@@ -61,8 +62,20 @@ export class Component extends React.Component<IProps, IState> {
      */
     constructor(props) {
         super(props);
-        this.state.value = props.value || props.defaultValue;
+        this.state.value = props.value || props.value;
         this.state.open = props.open;
+    }
+
+    /**
+     * Update state open statement and value statement if new props is coming up
+     * @param {Readonly<P>} nextProps
+     */
+    public componentWillReceiveProps(nextProps) {
+        this.setState({
+            open: nextProps.open || this.state.open,
+            searchText: nextProps.searchText || this.state.searchText,
+            value: nextProps.value,
+        });
     }
 
     /**
@@ -143,6 +156,9 @@ export class Component extends React.Component<IProps, IState> {
             resultValues.push(value);
         }
         this.setState({value: resultValues});
+        if (this.props.closeOnChange) {
+            this.toggleOpenListState(false);
+        }
         setTimeout(() => this.props.onChange(resultValues), 0);
     }
 
@@ -343,7 +359,7 @@ export class Component extends React.Component<IProps, IState> {
         const highlight = (value, key) => <span key={key} className="highlighter">{value}</span>;
 
         return selectOptions.map((item) => {
-            const reg = new RegExp(this.state.searchText, 'gi');
+            const reg = new RegExp(this.state.searchText, "gi");
             const matcher = item.label.match(reg); // 0 - match index - pos
             if (matcher && matcher[0]) {
                 const split = item.label.split(matcher[0]);
@@ -360,8 +376,8 @@ export class Component extends React.Component<IProps, IState> {
                 }, []);
                 item.label = (
                     <span>
-                             {resultArray.map(item => item)}
-                        </span>
+                         {resultArray.map((value) => value)}
+                    </span>
                 );
             }
             return item;
