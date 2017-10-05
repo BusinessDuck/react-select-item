@@ -3,14 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [3.0.8 - 2017-10-05]
+## [3.0.9] - 2017-10-05
 ## Changes
 - highlightTextGetter
 - highlightTextSetter
 - Value now its a compound object (check you code before update, see more in migration chapter)
 - example changed (search with date correct now)
 
-## [3.0.7 - 2017-10-03]
+## [3.0.8] - missed build
+
+## [3.0.7] - 2017-10-03
 ## Changes
 - Added custom options map function, for usage with extra features, like dates in selector
 - Custom label render function, placeholder added as second argument
