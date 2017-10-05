@@ -64,9 +64,30 @@ var Example = (function (_super) {
             filterFn: function (text, item) {
                 return item.label[0].props.children.join("").toLowerCase().indexOf(text.toLowerCase()) !== -1;
             },
+            highlightTextGetter: function (item) {
+                return item.label[0].props.children.join("");
+            },
+            highlightTextSetter: function (item, searchText, result) {
+                return (React.createElement("span", null,
+                    React.createElement("span", { className: "option-name" },
+                        " ",
+                        result.map(function (node) { return node; })),
+                    React.createElement("span", { className: "option-date" },
+                        " ",
+                        item.value.creationTs,
+                        " ")));
+            },
             label: "Favorite Color",
             noItemsText: "No items found",
             onChange: this.handleSingleSearchChange,
+            optionTransform: function (option) {
+                return {
+                    creationTs: option.props.creationTs,
+                    disabled: !!option.props.disabled,
+                    label: option.props.children,
+                    value: option.props.value,
+                };
+            },
             search: true,
             value: this.state.searchColor,
         };
@@ -89,9 +110,9 @@ var Example = (function (_super) {
         };
         return (React.createElement("div", { className: "example" },
             React.createElement("h1", null, "Select Item Example"),
-            React.createElement(react_select_item_js_1.SelectItem, tslib_1.__assign({}, select1Props), childrens.map(function (item, index) { return (React.createElement("option", { key: index, value: item.value, disabled: item.disabled }, item.name)); })),
+            React.createElement(react_select_item_js_1.SelectItem, tslib_1.__assign({}, select1Props), childrens.map(function (item, index) { return (React.createElement("option", { key: index, value: item, disabled: item.disabled }, item.name)); })),
             React.createElement("h1", null, "Select Search Example"),
-            React.createElement(react_select_item_js_1.SelectItem, tslib_1.__assign({}, select2Props), childrens.map(function (item, index) { return (React.createElement("option", { key: index, value: item.value, disabled: item.disabled },
+            React.createElement(react_select_item_js_1.SelectItem, tslib_1.__assign({}, select2Props), childrens.map(function (item, index) { return (React.createElement("option", { key: index, value: item, disabled: item.disabled },
                 React.createElement("span", { className: "option-name" },
                     " ",
                     item.name),
@@ -100,9 +121,9 @@ var Example = (function (_super) {
                     item.creationTs,
                     " "))); })),
             React.createElement("h1", null, "Select Multiple Example"),
-            React.createElement(react_select_item_js_1.SelectItem, tslib_1.__assign({}, select3Props), childrens.map(function (item, index) { return (React.createElement("option", { key: index, value: item.value }, item.name)); })),
+            React.createElement(react_select_item_js_1.SelectItem, tslib_1.__assign({}, select3Props), childrens.map(function (item, index) { return (React.createElement("option", { key: index, value: item }, item.name)); })),
             React.createElement("h1", null, "Select Multiple Search Example"),
-            React.createElement(react_select_item_js_1.SelectItem, tslib_1.__assign({}, select4Props), childrens.map(function (item, index) { return (React.createElement("option", { key: index, value: item.value }, item.name)); }))));
+            React.createElement(react_select_item_js_1.SelectItem, tslib_1.__assign({}, select4Props), childrens.map(function (item, index) { return (React.createElement("option", { key: index, value: item }, item.name)); }))));
     };
     return Example;
 }(React.Component));
@@ -163,7 +184,8 @@ var Component = function (_super) {
                 _this.toggleOpenListState(!_this.state.open);
             }
         };
-        _this.handleChange = function (value) {
+        _this.handleChange = function (_a) {
+            var value = _a.value;
             var resultValues = _this.props.multiple ? _this.state.value.slice() : [];
             if (resultValues.includes(value)) {
                 resultValues.splice(resultValues.indexOf(value), 1);
@@ -251,7 +273,8 @@ var Component = function (_super) {
             event.stopPropagation();
         }
     };
-    Component.prototype.isSelected = function (value) {
+    Component.prototype.isSelected = function (_a) {
+        var value = _a.value;
         return this.state.value.includes(value);
     };
     Component.prototype.getOptionsList = function () {
@@ -308,7 +331,8 @@ var Component = function (_super) {
             selectOptions = selectOptions.filter(function (item) {
                 return _this.props.filterFn(_this.state.searchText, item);
             });
-            selectOptions = this.highlightSearchText(selectOptions);
+            var _a = this.props, highlightTextGetter = _a.highlightTextGetter, highlightTextSetter = _a.highlightTextSetter;
+            selectOptions = this.highlightSearchText(selectOptions, highlightTextGetter, highlightTextSetter);
         }
         var divProps = {
             'aria-hidden': true,
@@ -333,7 +357,7 @@ var Component = function (_super) {
     Component.prototype.hasValue = function () {
         return this.state.value.length > 0;
     };
-    Component.prototype.highlightSearchText = function (selectOptions) {
+    Component.prototype.highlightSearchText = function (selectOptions, textGetter, textSetter) {
         var _this = this;
         var highlight = function (value, key) {
             return React.createElement('span', {
@@ -343,9 +367,9 @@ var Component = function (_super) {
         };
         return selectOptions.map(function (item) {
             var reg = new RegExp(_this.state.searchText, 'gi');
-            var matcher = item.label.match(reg);
+            var matcher = textGetter(item).match(reg);
             if (matcher && matcher[0]) {
-                var split_1 = item.label.split(matcher[0]);
+                var split_1 = textGetter(item).split(matcher[0]);
                 var resultArray = split_1.reduce(function (result, submatch, currentIndex) {
                     if (submatch === '' && split_1[currentIndex - 1] !== submatch && currentIndex !== split_1.length - 1) {
                         result.push(highlight(matcher[0], currentIndex));
@@ -357,9 +381,7 @@ var Component = function (_super) {
                     }
                     return result;
                 }, []);
-                item.label = React.createElement('span', null, resultArray.map(function (value) {
-                    return value;
-                }));
+                item.label = textSetter(item, _this.state.searchText, resultArray);
             }
             return item;
         });
@@ -368,6 +390,14 @@ var Component = function (_super) {
         clearText: 'Remove selection',
         filterFn: function () {
             return null;
+        },
+        highlightTextGetter: function (item) {
+            return item.label;
+        },
+        highlightTextSetter: function (item, searchText, result) {
+            return React.createElement('span', null, result.map(function (value) {
+                return value;
+            }));
         },
         multiple: false,
         noItemsText: 'No items found',
@@ -23343,53 +23373,6 @@ require('fuse-heresy-default')(module.exports)
 });
 return ___scope___.entry = "index.js";
 });
-FuseBox.pkg("fuse-box-css", {}, function(___scope___){
-___scope___.file("index.js", function(exports, require, module, __filename, __dirname){
-
-/**
- * Listens to 'async' requets and if the name is a css file
- * wires it to `__fsbx_css`
- */
-
-var runningInBrowser = FuseBox.isBrowser || FuseBox.target === "electron";
-
-var cssHandler = function(__filename, contents) {
-    if (runningInBrowser) {
-        var styleId = __filename.replace(/[\.\/]+/g, '-');
-        if (styleId.charAt(0) === '-') styleId = styleId.substring(1);
-        var exists = document.getElementById(styleId);
-        if (!exists) {
-            //<link href="//fonts.googleapis.com/css?family=Covered+By+Your+Grace" rel="stylesheet" type="text/css">
-            var s = document.createElement(contents ? 'style' : 'link');
-            s.id = styleId;
-            s.type = 'text/css';
-            if (contents) {
-                s.innerHTML = contents;
-            } else {
-                s.rel = 'stylesheet';
-                s.href = __filename;
-            }
-            document.getElementsByTagName('head')[0].appendChild(s);
-        } else {
-            if (contents) {
-                exists.innerHTML = contents;
-            }
-        }
-    }
-}
-if (typeof FuseBox !== "undefined" && runningInBrowser) {
-    FuseBox.on('async', function(name) {
-        if (/\.css$/.test(name)) {
-            cssHandler(name);
-            return false;
-        }
-    });
-}
-
-module.exports = cssHandler;
-});
-return ___scope___.entry = "index.js";
-});
 FuseBox.pkg("classnames", {}, function(___scope___){
 ___scope___.file("bind.js", function(exports, require, module, __filename, __dirname){
 
@@ -23442,6 +23425,53 @@ ___scope___.file("bind.js", function(exports, require, module, __filename, __dir
 	}
 }());
 
+});
+return ___scope___.entry = "index.js";
+});
+FuseBox.pkg("fuse-box-css", {}, function(___scope___){
+___scope___.file("index.js", function(exports, require, module, __filename, __dirname){
+
+/**
+ * Listens to 'async' requets and if the name is a css file
+ * wires it to `__fsbx_css`
+ */
+
+var runningInBrowser = FuseBox.isBrowser || FuseBox.target === "electron";
+
+var cssHandler = function(__filename, contents) {
+    if (runningInBrowser) {
+        var styleId = __filename.replace(/[\.\/]+/g, '-');
+        if (styleId.charAt(0) === '-') styleId = styleId.substring(1);
+        var exists = document.getElementById(styleId);
+        if (!exists) {
+            //<link href="//fonts.googleapis.com/css?family=Covered+By+Your+Grace" rel="stylesheet" type="text/css">
+            var s = document.createElement(contents ? 'style' : 'link');
+            s.id = styleId;
+            s.type = 'text/css';
+            if (contents) {
+                s.innerHTML = contents;
+            } else {
+                s.rel = 'stylesheet';
+                s.href = __filename;
+            }
+            document.getElementsByTagName('head')[0].appendChild(s);
+        } else {
+            if (contents) {
+                exists.innerHTML = contents;
+            }
+        }
+    }
+}
+if (typeof FuseBox !== "undefined" && runningInBrowser) {
+    FuseBox.on('async', function(name) {
+        if (/\.css$/.test(name)) {
+            cssHandler(name);
+            return false;
+        }
+    });
+}
+
+module.exports = cssHandler;
 });
 return ___scope___.entry = "index.js";
 });
