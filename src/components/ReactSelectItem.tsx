@@ -10,6 +10,8 @@ export interface IProps {
     onChange: any;
     optionTransform?: any;
     filterFn: any;
+    highlightTextGetter: any;
+    highlightTextSetter: any;
     search: boolean;
     searchText?: string;
     multiple: boolean;
@@ -40,6 +42,16 @@ export class Component extends React.Component<IProps, IState> {
     public static defaultProps: Partial<IProps> = {
         clearText: "Remove selection",
         filterFn: () => null,
+        highlightTextGetter: (item) => {
+            return item.label;
+        },
+        highlightTextSetter: (item, searchText, result) => {
+            return(
+                <span>
+                     {result.map((value) => value)}
+                </span>
+            );
+        },
         multiple: false,
         noItemsText: "No items found",
         onChange: () => null,
@@ -122,7 +134,7 @@ export class Component extends React.Component<IProps, IState> {
      * @param value
      * @returns {any}
      */
-    private isSelected(value): boolean {
+    private isSelected({ value }): boolean {
         return this.state.value.includes(value);
     }
 
@@ -147,7 +159,7 @@ export class Component extends React.Component<IProps, IState> {
      * Handle change value, onChange is called async (wrapped in zero timeout)
      * @param value
      */
-    private handleChange = (value) => {
+    private handleChange = ({ value }) => {
         const resultValues: any[] = this.props.multiple ? this.state.value.slice() : [];
         if (resultValues.includes(value)) {
             resultValues.splice(resultValues.indexOf(value), 1);
@@ -276,8 +288,8 @@ export class Component extends React.Component<IProps, IState> {
             selectOptions = selectOptions.filter((item) => {
                 return this.props.filterFn(this.state.searchText, item);
             });
-
-            selectOptions = this.highlightSearchText(selectOptions);
+            const { highlightTextGetter, highlightTextSetter } = this.props;
+            selectOptions = this.highlightSearchText(selectOptions, highlightTextGetter, highlightTextSetter);
         }
 
         const divProps = {
@@ -353,18 +365,18 @@ export class Component extends React.Component<IProps, IState> {
      * @param {any[]} selectOptions
      * @returns {any[]}
      */
-    private highlightSearchText(selectOptions: any[]) {
+    private highlightSearchText(selectOptions: any[], textGetter: any, textSetter: any) {
 
         const highlight = (value, key) => <span key={key} className="highlighter">{value}</span>;
 
         return selectOptions.map((item) => {
             const reg = new RegExp(this.state.searchText, "gi");
-            const matcher = item.label.match(reg); // 0 - match index - pos
+            const matcher = textGetter(item).match(reg); // 0 - match index - pos
             if (matcher && matcher[0]) {
-                const split = item.label.split(matcher[0]);
+                const split = textGetter(item).split(matcher[0]);
                 const resultArray = split.reduce((result, submatch, currentIndex) => {
                     if (submatch === "" && split[currentIndex - 1] !== submatch && currentIndex !== split.length - 1) {
-                        result.push(highlight(matcher[0], currentIndex))
+                        result.push(highlight(matcher[0], currentIndex));
                     } else {
                         result.push(submatch);
                         if (currentIndex !== split.length - 1) {
@@ -373,11 +385,7 @@ export class Component extends React.Component<IProps, IState> {
                     }
                     return result;
                 }, []);
-                item.label = (
-                    <span>
-                         {resultArray.map((value) => value)}
-                    </span>
-                );
+                item.label = textSetter(item, this.state.searchText, resultArray);
             }
             return item;
         });

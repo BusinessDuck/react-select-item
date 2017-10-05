@@ -63,9 +63,28 @@ class Example extends React.Component<any, any> {
             filterFn: (text, item) => {
                 return item.label[0].props.children.join("").toLowerCase().indexOf(text.toLowerCase()) !== -1;
             },
+            highlightTextGetter: (item) => {
+                return item.label[0].props.children.join("");
+            },
+            highlightTextSetter: (item, searchText, result) => {
+                return (
+                    <span>
+                        <span className="option-name"> {result.map((node: any) => node)}</span>
+                        <span className="option-date"> {item.value.creationTs} </span>
+                    </span>
+                );
+            },
             label: "Favorite Color",
             noItemsText: "No items found",
             onChange: this.handleSingleSearchChange,
+            optionTransform: (option) => {
+                return {
+                    creationTs: option.props.creationTs,
+                    disabled: !!option.props.disabled,
+                    label: option.props.children,
+                    value: option.props.value,
+                };
+            },
             search: true,
             value: this.state.searchColor,
         };
@@ -95,7 +114,7 @@ class Example extends React.Component<any, any> {
                 <h1>Select Item Example</h1>
                 <SelectItem {...select1Props}>
                     {childrens.map((item: any, index) => (
-                            <option key={index} value={item.value} disabled={item.disabled}>{item.name}</option> // tslint:disable-line
+                            <option key={index} value={item} disabled={item.disabled}>{item.name}</option> // tslint:disable-line
                         ),
                     )}
                 </SelectItem>
@@ -103,7 +122,7 @@ class Example extends React.Component<any, any> {
                 <h1>Select Search Example</h1>
                 <SelectItem {...select2Props}>
                     {childrens.map((item: any, index) => (
-                        <option key={index} value={item.value} disabled={item.disabled}>
+                        <option key={index} value={item} disabled={item.disabled}>
                             <span className="option-name"> {item.name}</span>
                             <span className="option-date"> {item.creationTs} </span>
                         </option>
@@ -114,7 +133,7 @@ class Example extends React.Component<any, any> {
                 <h1>Select Multiple Example</h1>
                 <SelectItem {...select3Props}>
                     {childrens.map((item, index) => (
-                            <option key={index} value={item.value}>{item.name}</option>
+                            <option key={index} value={item as any}>{item.name}</option>
                         ),
                     )}
                 </SelectItem>
@@ -122,7 +141,7 @@ class Example extends React.Component<any, any> {
                 <h1>Select Multiple Search Example</h1>
                 <SelectItem {...select4Props}>
                     {childrens.map((item, index) => (
-                            <option key={index} value={item.value}>{item.name}</option>
+                            <option key={index} value={item as any}>{item.name}</option>
                         ),
                     )}
                 </SelectItem>

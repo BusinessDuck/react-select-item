@@ -1,7 +1,7 @@
-import * as React from "react";
 import {shallow} from "enzyme";
-import {Component as SelectItem} from '../ReactSelectItem';
-import objectAssign from 'object-assign';
+import objectAssign from "object-assign";
+import * as React from "react";
+import {Component as SelectItem} from "../ReactSelectItem";
 
 // it("Increment change after click", () => {
 //     // Render a checkbox with label in the document
@@ -19,28 +19,28 @@ import objectAssign from 'object-assign';
 // });
 
 
-describe('SelectItem component', function () {
+describe("SelectItem component", function() {
 
     const testOptions = [
-        {value: 'red', name: 'Red'},
-        {value: 'green', name: 'Green'},
-        {value: 'blue', name: 'Blue'},
+        {value: "red", name: "Red"},
+        {value: "green", name: "Green"},
+        {value: "blue", name: "Blue"},
     ];
     const defaultProps: React.DetailedHTMLProps<any, any> = {
-        label: 'foo',
+        label: "foo",
         value: [],
-        onChange: function () {
-        }
+        onChange() {
+        },
     };
 
     beforeEach(() => {
         this.shallow = shallow(
             <SelectItem {...defaultProps}>
                 {testOptions.map((item: any, index: number) => (
-                        <option key={index} value={item.value}>{item.name}</option>
-                    )
+                        <option key={index} value={item}>{item.name}</option>
+                    ),
                 )}
-            </SelectItem>
+            </SelectItem>,
         );
         this.target = this.shallow.find("div.react-select-item");
     });
@@ -50,20 +50,20 @@ describe('SelectItem component', function () {
         expect(this.target.length).toBe(1);
     });
 
-    it('should render the label when no value is selected', () => {
+    it("should render the label when no value is selected", () => {
         const label = this.shallow.find("div.react-select-item-label");
         expect(label).toBeDefined();
         expect(label.text()).toEqual(defaultProps.label);
     });
 
-    it('should render the menu node with options', () => {
+    it("should render the menu node with options", () => {
         const optionsNode = this.shallow.find("div.react-select-item-off-screen");
         expect(optionsNode).toBeDefined();
         expect(optionsNode.length).toBe(1);
         expect(optionsNode.children().length).toEqual(testOptions.length);
     });
 
-    it('should open menu on button click event', () => {
+    it("should open menu on button click event", () => {
         let menuNode = this.shallow.find("div.react-select-item-options");
 
         expect(menuNode).toBeDefined();

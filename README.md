@@ -5,20 +5,9 @@
 Simple and awesome react select component for rendering Select with options, complete with react ^14.0
 Search inside options supported. Writing by ES2015. 
 
-## Version 3.0.7 released [CHANGELOG](./Changelog.md)
+## Version 3.0.8 released [CHANGELOG](./Changelog.md)
 
 ## [Demo](https://businessduck.github.io/react-select-item/)
-
-### Migration from 2.x versions
-
-```
-1. DOM stricture was changed! If you have the dom depended staff, you need fix it
-2. Change you onClick handler argument onClick(value: Array) => {} value is array every time now
-3. Change value input prop - <SelectItem value={myValue: Array} /> value is array now
-4. Search not will be able until flag search is false, if you using the filterFn - set up search to true
-5. Import default deprecated, ise target import {SelectItem} instead of * as Select item
-6. CSS styles location change 'react-select-item/dist/styles.css' instead of 'react-select-item/src/...'
-```
 
 ## Installation
 
@@ -34,6 +23,8 @@ $ npm install react-select-item --save
 | onChange | function | change handler function |
 | optionTransform | function | transform options from react children to native object |
 | filterFn | function | filter options by search input text |
+| highlightTextGetter | function | get the highlight text from compound option object |
+| highlightTextSetter | function | set the output compound object to the option label after search filter |
 | search | boolean | enable or disable search |
 | searchText | string | current search text value |
 | multiple | boolean | enable or disable multiple select |
@@ -44,18 +35,19 @@ $ npm install react-select-item --save
 | open | boolean | options menu statement flag |
 | customLabelsRender | function | custom render for selected items |
 
+
+## Migration from 2.x versions
+
+```
+1. DOM stricture was changed! If you have the dom depended staff, you need fix it
+2. Change you onClick handler argument onClick(value: Array) => {} value is array every time now
+3. Change value input prop - <SelectItem value={myValue: Array} /> value is array now
+4. Search not will be able until flag search is false, if you using the filterFn - set up search to true
+5. Import default deprecated, ise target import {SelectItem} instead of * as Select item
+6. CSS styles location change 'react-select-item/dist/styles.css' instead of 'react-select-item/src/...'
+```
+
 ## Development
-
-```bash
-$ git clone git@github.com:BusinessDuck/react-select-item.git
-$ npm install
-```
-
-### Run the tests
-
-```bash
-$ npm test
-```
 
 ### Start the dev server
 
