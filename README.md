@@ -45,6 +45,7 @@ $ npm install react-select-item --save
 4. Search not will be able until flag search is false, if you using the filterFn - set up search to true
 5. Import default deprecated, ise target import {SelectItem} instead of * as Select item
 6. CSS styles location change 'react-select-item/dist/styles.css' instead of 'react-select-item/src/...'
+7. instead of <option value={item.value} pass the full item object <option value={item}
 ```
 
 ## Development
@@ -118,7 +119,7 @@ export default class MultiSelectFilter extends React.Component {
                      className="form-control"
                      multiple={true}>
             { this.props.options.map((item, index) => (
-                <option key={index} value={item.value}>{item.name}</option>
+                <option key={index} value={item}>{item.name}</option>
               )
             )}
           </SelectItem>
