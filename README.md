@@ -5,7 +5,7 @@
 Simple and awesome react select component for rendering Select with options, complete with react ^14.0
 Search inside options supported. Writing by ES2015. 
 
-## Version 3.0.5 released [CHANGELOG](./Changelog.md)
+## Version 3.0.7 released [CHANGELOG](./Changelog.md)
 
 ## [Demo](https://businessduck.github.io/react-select-item/)
 
@@ -25,6 +25,24 @@ Search inside options supported. Writing by ES2015.
 ```bash
 $ npm install react-select-item --save
 ```
+## Props Guide
+| Property | Type | Description |
+|---|---|---|
+| closeOnChange | boolean | close options menu after item click |
+| label | string | default placeholder text |
+| value | array | selected values |
+| onChange | function | change handler function |
+| optionTransform | function | transform options from react children to native object |
+| filterFn | function | filter options by search input text |
+| search | boolean | enable or disable search |
+| searchText | string | current search text value |
+| multiple | boolean | enable or disable multiple select |
+| noItemsText | string | no items found text |
+| searchPlaceholder | string | search placeholder text |
+| className | classnames | class name, may be string or object, classnames inside |
+| clearText | string | clear items button popup text |
+| open | boolean | options menu statement flag |
+| customLabelsRender | function | custom render for selected items |
 
 ## Development
 

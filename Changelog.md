@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.0.7 - 2017-10-05]
+## Changes
+- Added custom options map function, for usage with extra features, like dates in selector
+- Custom label render function, placeholder added as second argument
+- Additional example added
+- Readme propTypes description
+
 ## [3.0.6] - 2017-10-02
 ## Changes
 - Component migrated from uncontrolled to controlled

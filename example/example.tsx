@@ -33,13 +33,17 @@ class Example extends React.Component<any, any> {
 
     public render() {
         const childrens = [
-            {value: "red", name: "Red", disabled: true},
-            {value: "orange", name: "Orange"},
-            {value: "green", name: "Green"},
-            {value: "black", name: "Black"},
-            {value: "yellow", name: "Yellow"},
-            {value: "purple", name: "Purple"},
-            {value: "greenish", name: "Light greenish with a little bit of yellow"},
+            {value: "red", name: "Red", disabled: true, creationTs: "20.01.2017 - 16:53:24"},
+            {value: "orange", name: "Orange", creationTs: "20.02.2017 - 12:33:04"},
+            {value: "green", name: "Green", creationTs: "10.01.2017 - 11:13:14"},
+            {value: "black", name: "Black", creationTs: "05.01.2017 - 15:23:01"},
+            {value: "yellow", name: "Yellow", creationTs: "04.01.2017 - 22:53:34"},
+            {value: "purple", name: "Purple", creationTs: "02.01.2017 - 11:25:51"},
+            {
+                creationTs: "01.01.2017 - 01:22:10",
+                name: "Light greenish with a little bit of yellow",
+                value: "greenish",
+            },
         ];
 
         const select1Props = {
@@ -52,15 +56,18 @@ class Example extends React.Component<any, any> {
         };
 
         const select2Props = {
-            className: "my-example-select-box",
+            className: "my-example-select-box custom-select-item",
+            customLabelsRender: (selected, placeholder) => {
+                return selected.length > 0 ? selected[0] : placeholder;
+            },
+            filterFn: (text, item) => {
+                return item.label[0].props.children.join("").toLowerCase().indexOf(text.toLowerCase()) !== -1;
+            },
             label: "Favorite Color",
             noItemsText: "No items found",
             onChange: this.handleSingleSearchChange,
             search: true,
             value: this.state.searchColor,
-            filterFn(text, item) {
-                return item.label.indexOf(text) !== -1;
-            },
         };
 
         const select3Props = {
@@ -87,7 +94,7 @@ class Example extends React.Component<any, any> {
             <div className="example">
                 <h1>Select Item Example</h1>
                 <SelectItem {...select1Props}>
-                    {childrens.map((item, index) => (
+                    {childrens.map((item: any, index) => (
                             <option key={index} value={item.value} disabled={item.disabled}>{item.name}</option> // tslint:disable-line
                         ),
                     )}
@@ -95,8 +102,11 @@ class Example extends React.Component<any, any> {
 
                 <h1>Select Search Example</h1>
                 <SelectItem {...select2Props}>
-                    {childrens.map((item, index) => (
-                            <option key={index} value={item.value}>{item.name}</option>
+                    {childrens.map((item: any, index) => (
+                        <option key={index} value={item.value} disabled={item.disabled}>
+                            <span className="option-name"> {item.name}</span>
+                            <span className="option-date"> {item.creationTs} </span>
+                        </option>
                         ),
                     )}
                 </SelectItem>

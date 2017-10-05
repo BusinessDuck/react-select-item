@@ -10,3 +10,29 @@ h1 {
   color: #aaa;
 }
 
+/**
+ Custom styles for dates here
+ */
+.option-name,
+.option-date {
+  display: inline-block;
+}
+.option-name {
+  max-width: 375px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.option-date {
+  background-color: rgba(51, 122, 183, 0.6509803921568628);
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 10px;
+  padding: 3px;
+  float: right;
+}
+.react-select-item-label > .compare-dump-date {
+  background-color: rgb(51, 122, 183);
+  position: relative;
+  top: 8px;
+}
+

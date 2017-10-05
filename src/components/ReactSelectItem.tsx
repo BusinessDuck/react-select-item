@@ -8,6 +8,7 @@ export interface IProps {
     label?: string;
     value?: any[];
     onChange: any;
+    optionTransform?: any;
     filterFn: any;
     search: boolean;
     searchText?: string;
@@ -42,6 +43,13 @@ export class Component extends React.Component<IProps, IState> {
         multiple: false,
         noItemsText: "No items found",
         onChange: () => null,
+        optionTransform: (option: any) => {
+            return {
+                disabled: !!option.props.disabled,
+                label: option.props.children,
+                value: option.props.value,
+            };
+        },
         search: false,
         searchPlaceholder: "Search...",
     };
@@ -123,16 +131,7 @@ export class Component extends React.Component<IProps, IState> {
      * @returns {RSI.IOption[]}
      */
     private getOptionsList() {
-        const options: IOption[] = [];
-        React.Children.forEach(this.props.children, (option: any) => {
-            options.push({
-                disabled: !!option.props.disabled,
-                label: option.props.children,
-                value: option.props.value,
-            });
-        });
-
-        return options;
+        return React.Children.map(this.props.children, this.props.optionTransform);
     }
 
     /**
@@ -209,11 +208,11 @@ export class Component extends React.Component<IProps, IState> {
      */
     private renderLabel() {
         const selected = this.getOptionsList()
-            .filter((option) => this.isSelected(option.value))
-            .map((option) => option.label);
+            .filter((option: any) => this.isSelected(option.value))
+            .map((option: any) => option.label);
 
         if (this.props.customLabelsRender) {
-            return this.props.customLabelsRender(selected);
+            return this.props.customLabelsRender(selected, this.props.label);
         }
         return selected.length > 0 ? selected.join(", ") : this.props.label;
     }
@@ -381,6 +380,6 @@ export class Component extends React.Component<IProps, IState> {
                 );
             }
             return item;
-        })
+        });
     }
 }
