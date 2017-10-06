@@ -64,6 +64,7 @@ Sparky.task("config-example", () => {
     fuse = FuseBox.init({
         // globals: { "react-select-item": "../dist/react-select-item.js" },
         alias: { 'react-select-item': './dist/react-select-item.js' },
+        target: "browser",
         homeDir: "example",
         tsConfig: "example/tsconfig.json",
         output: "build/$name.js",
