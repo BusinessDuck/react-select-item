@@ -53,7 +53,7 @@ $ npm install react-select-item --save
 ### Start the dev server
 
 ```bash
-$ npm run dev
+$ npm run serve
 $ npm run example
 ```
 

@@ -47,7 +47,7 @@ Sparky.task("config-dev", () => {
                     outFile: `${dist}/styles.css`
                 })
             ],
-            QuantumPlugin({
+            isProduction && QuantumPlugin({
                 target: 'npm',
                 globalRequire: false,
                 bakeApiIntoBundle : 'react-select-item',
@@ -92,7 +92,7 @@ Sparky.task("check-updates", () => {
     updateNotifier({pkg}).notify();
 });
 
-Sparky.task("default", ["clean", "config-dev", "check-updates"], () => {
+Sparky.task("dev", ["clean", "config-dev", "check-updates"], () => {
     fuse.dev({
         root: "dist",
         port: 8080,

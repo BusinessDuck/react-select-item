@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "node fuse dist",
-    "dev": "node fuse",
+    "serve": "npm-run-all --parallel dev test",
+    "dev": "node fuse dev",
     "example": "node fuse example",
     "test": "node fuse tests",
     "test:watch": "node fuse tests:watch"
