@@ -47,7 +47,7 @@ Sparky.task("config-dev", () => {
                     outFile: `${dist}/styles.css`
                 })
             ],
-            QuantumPlugin({
+            isProduction && QuantumPlugin({
                 target: 'npm',
                 globalRequire: false,
                 bakeApiIntoBundle : 'react-select-item',
