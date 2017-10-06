@@ -66,10 +66,10 @@ class Example extends React.Component<any, any> {
             highlightTextGetter: (item) => {
                 return item.label[0].props.children.join("");
             },
-            highlightTextSetter: (item, searchText, result) => {
+            highlightTextSetter: (item, searchText, highlightedText) => {
                 return (
                     <span>
-                        <span className="option-name"> {result.map((node: any) => node)}</span>
+                        <span className="option-name"> {highlightedText.map((node: any) => node)}</span>
                         <span className="option-date"> {item.value.creationTs} </span>
                     </span>
                 );
