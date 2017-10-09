@@ -5,7 +5,7 @@
 Simple and awesome react select component for rendering Select with options, complete with react ^14.0
 Search inside options supported. Writing by ES2015. 
 
-## Version 3.0.9 released [CHANGELOG](./Changelog.md)
+## Version 3.0.10 released [CHANGELOG](./Changelog.md)
 
 ## [Demo](https://businessduck.github.io/react-select-item/)
 

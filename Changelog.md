@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.0.10] - 2017-10-09
+## Changes
+- Removed extra dependencies
+- Removed dependencies section in package.json file
+- Package.json update
+- Added react 16.0 support
+- Minor code changes, syntax corrections
+
 ## [3.0.9] - 2017-10-05
 ## Changes
 - highlightTextGetter
