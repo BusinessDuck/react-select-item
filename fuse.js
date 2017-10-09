@@ -64,6 +64,7 @@ Sparky.task("config-example", () => {
     fuse = FuseBox.init({
         // globals: { "react-select-item": "../dist/react-select-item.js" },
         alias: { 'react-select-item': './dist/react-select-item.js' },
+        target: "browser",
         homeDir: "example",
         tsConfig: "example/tsconfig.json",
         output: "build/$name.js",
@@ -92,7 +93,7 @@ Sparky.task("check-updates", () => {
     updateNotifier({pkg}).notify();
 });
 
-Sparky.task("default", ["clean", "config-dev", "check-updates", "tests"], () => {
+Sparky.task("dev", ["clean", "config-dev", "check-updates"], () => {
     fuse.dev({
         root: "dist",
         port: 8080,
@@ -117,7 +118,7 @@ Sparky.task("tests:watch", () => {
 });
 
 Sparky.task("tests", () => {
-    runCLI({}, ["src"]);
+    runCLI({ci: true}, ["src"]);
 });
 
 Sparky.task("clean", () => Sparky.src("dist/").clean("dist/"));

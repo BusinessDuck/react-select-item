@@ -1,5 +1,4 @@
 import {shallow} from "enzyme";
-import objectAssign from "object-assign";
 import * as React from "react";
 import {Component as SelectItem} from "../ReactSelectItem";
 
