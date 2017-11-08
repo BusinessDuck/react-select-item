@@ -5,21 +5,18 @@ import "./styles.scss";
 
 export interface IProps {
     closeOnChange?: boolean;
-    label?: string;
+    placeholder?: string;
     value?: any[];
+    options: any[];
     onChange: any;
-    optionTransform?: any;
-    filterFn: any;
+    onSearch: any;
     highlightTextGetter: any;
     highlightTextSetter: any;
     search: boolean;
-    searchText?: string;
     multiple: boolean;
-    noItemsText?: string;
+    searchEmptyPlaceholder?: string;
     searchPlaceholder?: string;
     className?: string | object;
-    clearText?: string;
-    children?: React.ComponentElement<any, any>;
     open?: boolean;
     customLabelsRender?: any;
 }
@@ -27,21 +24,14 @@ export interface IProps {
 export interface IState {
     open: boolean;
     searchText: string;
+    search: boolean;
     value: any[];
-}
-
-export interface IOption {
-    disabled?: boolean;
-    label: string;
-    value: any;
 }
 
 // RSI react-select-item v3
 export class Component extends React.Component<IProps, IState> {
 
     public static defaultProps: Partial<IProps> = {
-        clearText: "Remove selection",
-        filterFn: () => null,
         highlightTextGetter: (item) => {
             return item.label;
         },
@@ -53,21 +43,16 @@ export class Component extends React.Component<IProps, IState> {
             );
         },
         multiple: false,
-        noItemsText: "No items found",
         onChange: () => null,
-        optionTransform: (option: any) => {
-            return {
-                disabled: !!option.props.disabled,
-                label: option.props.children,
-                value: option.props.value,
-            };
-        },
+        onSearch: () => null,
         search: false,
+        searchEmptyPlaceholder: "No items found",
         searchPlaceholder: "Search...",
     };
 
     public state: IState = {
         open: false,
+        search: false,
         searchText: "",
         value: [],
     };
@@ -82,7 +67,7 @@ export class Component extends React.Component<IProps, IState> {
      */
     constructor(props) {
         super(props);
-        this.state.value = props.value || props.value;
+        this.state.value = props.value;
         this.state.open = props.open;
     }
 
@@ -139,11 +124,11 @@ export class Component extends React.Component<IProps, IState> {
     }
 
     /**
-     * Get options array {disabled: ..., label: ... , value: ... } from Reach children
+     * Get options array {disabled: ..., placeholder: ... , value: ... } from Reach children
      * @returns {RSI.IOption[]}
      */
     private getOptionsList() {
-        return React.Children.map(this.props.children, this.props.optionTransform);
+        return this.props.options;
     }
 
     /**
@@ -151,7 +136,11 @@ export class Component extends React.Component<IProps, IState> {
      */
     private handleButtonClick = (e) => {
         if (!e || !e.target.classList.contains("react-select-item-clear")) {
-            this.toggleOpenListState(!this.state.open);
+            if (this.state.open) {
+                this.setState({search: true});
+            } else {
+                this.toggleOpenListState(!this.state.open);
+            }
         }
     }
 
@@ -166,7 +155,7 @@ export class Component extends React.Component<IProps, IState> {
         } else {
             resultValues.push(value);
         }
-        this.setState({value: resultValues});
+        this.setState({value: resultValues, search: false});
         if (this.props.closeOnChange) {
             this.toggleOpenListState(false);
         }
@@ -224,9 +213,9 @@ export class Component extends React.Component<IProps, IState> {
             .map((option: any) => option.label);
 
         if (this.props.customLabelsRender) {
-            return this.props.customLabelsRender(selected, this.props.label);
+            return this.props.customLabelsRender(selected, this.props.placeholder);
         }
-        return selected.length > 0 ? selected.join(", ") : this.props.label;
+        return selected.length > 0 ? selected.join(", ") : this.props.placeholder;
     }
 
     /**
@@ -246,7 +235,7 @@ export class Component extends React.Component<IProps, IState> {
         return (
             <div {...buttonProps}>
                 <div className="react-select-item-label">
-                    {this.renderLabel()}
+                    {this.state.search ? this.renderSearchInput() : this.renderLabel()}
                 </div>
                 {this.renderClearButton()}
             </div>
@@ -279,14 +268,15 @@ export class Component extends React.Component<IProps, IState> {
      * @returns {any}
      */
     private renderOptionMenu() {
+        const { searchEmptyPlaceholder, search, onSearch} = this.props;
         const className = classNames(["react-select-item-options", {
             "react-select-item-hidden": !this.state.open,
         }]);
         let selectOptions: any[] = this.getOptionsList();
 
-        if (this.props.search && this.state.searchText.length > 0) {
+        if (search && this.state.searchText.length > 0) {
             selectOptions = selectOptions.filter((item) => {
-                return this.props.filterFn(this.state.searchText, item);
+                return onSearch(this.state.searchText, item);
             });
             const { highlightTextGetter, highlightTextSetter } = this.props;
             selectOptions = this.highlightSearchText(selectOptions, highlightTextGetter, highlightTextSetter);
@@ -295,16 +285,17 @@ export class Component extends React.Component<IProps, IState> {
         const divProps = {
             "aria-hidden": true,
             "className": className,
-            // "onBlur": this.handleBlur,
-            // "onFocus": this.handleFocus,
             "ref": (ref) => this.menuRef = ref,
             "tabIndex": 0,
         };
+
         return (
             <div {...divProps}>
-                {this.props.search ? this.renderSearchInput() : null}
+                {search ? this.renderSearchInput() : null}
                 <div className={"react-select-item-off-screen" + (selectOptions.length === 0 ? " no-items" : "")}>
-                    {selectOptions.length > 0 ? selectOptions.map(this.renderOption) : this.props.noItemsText}
+                    {
+                        selectOptions.length > 0 ? selectOptions.map(this.renderOption) : searchEmptyPlaceholder
+                    }
                 </div>
             </div>
 
@@ -318,13 +309,11 @@ export class Component extends React.Component<IProps, IState> {
      * @returns {any}
      */
     private renderOption = (option, i) => {
-        const className = classNames([
-            "react-select-item-option",
-            {
-                "react-select-item-option-disabled": option.disabled,
-                "react-select-item-option-selected": this.isSelected(option.value),
-            },
-        ]);
+        const className = classNames({
+            "react-select-item-option": true,
+            "react-select-item-option-disabled": option.disabled,
+            "react-select-item-option-selected": this.isSelected(option.value),
+        });
         const aProps: React.DetailedHTMLProps<any, any> = {
             className,
             // onBlur: this.handleBlur,
@@ -344,9 +333,8 @@ export class Component extends React.Component<IProps, IState> {
     private renderClearButton() {
         if (this.hasValue()) {
             const brnProps: React.DetailedHTMLProps<any, any> = {
-                "aria-label": this.props.clearText,
-                "className": "react-select-item-clear",
-                "onClick": this.handleClear,
+                className: "react-select-item-clear",
+                onClick: this.handleClear,
             };
             return <button {...brnProps}/>;
         }
