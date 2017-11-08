@@ -1,9 +1,9 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {Component as SelectItem} from "../ReactSelectItem";
+import {Component as SelectItem} from "../Select";
 
 // it("Increment change after click", () => {
-//     // Render a checkbox with label in the document
+//     // Render a checkbox with placeholder in the document
 //     const target = shallow(
 //         <HelloWorld/>
 //     );
@@ -49,8 +49,8 @@ describe("SelectItem component", function() {
         expect(this.target.length).toBe(1);
     });
 
-    it("should render the label when no value is selected", () => {
-        const label = this.shallow.find("div.react-select-item-label");
+    it("should render the placeholder when no value is selected", () => {
+        const label = this.shallow.find("div.react-select-item-placeholder");
         expect(label).toBeDefined();
         expect(label.text()).toEqual(defaultProps.label);
     });
@@ -84,7 +84,7 @@ describe("SelectItem component", function() {
 
         expect(menuNode.hasClass("react-select-item-hidden")).toBeTruthy();
 
-        const label = this.shallow.find(".react-select-item-label");
+        const label = this.shallow.find(".react-select-item-placeholder");
 
         expect(label.length).toBe(1);
         expect(label.text()).toEqual(testOptions[0].name);
