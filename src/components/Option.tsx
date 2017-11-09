@@ -24,7 +24,7 @@ export class Option extends React.Component<IOptionProps, {}> {
         return <div {...this.mergeOptionProps()}>{name}</div>;
     }
 
-    protected onClick = () => {
+    private onClick = () => {
         const {value, disabled} = this.props.option;
         const {onClick} = this.props;
         if (disabled) {
@@ -33,7 +33,7 @@ export class Option extends React.Component<IOptionProps, {}> {
         return onClick(value);
     }
 
-    protected mergeOptionProps() {
+    private mergeOptionProps() {
         const {getOptionProps, selected} = this.props;
         const {value, disabled} = this.props.option;
         const inputProps: React.DetailedHTMLProps<any, any> = getOptionProps(value);

@@ -75,6 +75,7 @@ export class Select extends React.Component<IProps, IState> {
 
     public menuRef: HTMLInputElement;
     private listenerActive: boolean = false;
+
     /**
      * RSI constructor
      * @param props
@@ -276,7 +277,11 @@ export class Select extends React.Component<IProps, IState> {
             "type": "text",
             "value": this.state.searchText,
         };
-        return <input {...inputProps}/>;
+        return (
+            <div>
+                <input {...inputProps}/>
+            </div>
+        );
     }
 
     /**
@@ -307,7 +312,7 @@ export class Select extends React.Component<IProps, IState> {
 
         return (
             <div {...divProps}>
-                { selectOptions.length > 0 ? selectOptions.map(this.renderOption) : this.renderNoSearchResults() }
+                {selectOptions.length > 0 ? selectOptions.map(this.renderOption) : this.renderNoSearchResults()}
             </div>
 
         );
@@ -327,7 +332,6 @@ export class Select extends React.Component<IProps, IState> {
             option,
             selected: this.isSelected(option.value),
         };
-        console.log(this.isSelected(option.value), option);
 
         return <OptionComponent key={i} {...optionProps}/>;
     }
