@@ -327,6 +327,7 @@ export class Select extends React.Component<IProps, IState> {
             option,
             selected: this.isSelected(option.value),
         };
+        console.log(this.isSelected(option.value), option);
 
         return <OptionComponent key={i} {...optionProps}/>;
     }

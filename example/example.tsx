@@ -78,7 +78,6 @@ class Example extends React.Component<any, any> {
             //         </span>
             //     );
             // },
-            label: "Favorite Color",
             noItemsText: "No items found",
             onChange: this.handleSingleSearchChange,
             optionTransform: (option) => {
@@ -90,6 +89,7 @@ class Example extends React.Component<any, any> {
                 };
             },
             options: optionsList,
+            placeholder: "Favorite Color",
             search: true,
             value: this.state.searchColor,
         };
@@ -98,14 +98,16 @@ class Example extends React.Component<any, any> {
             label: "Favorite Colors",
             multiple: true,
             onChange: this.handleMultiChange,
+            options: optionsList,
+            search: true,
             value: this.state.colors,
         };
 
         const select4Props = {
-            label: "Favorite Colors",
             multiple: true,
             noItemsText: "No items found",
             onChange: this.handleMultiSearchChange,
+            placeholder: "Favorite Colors",
             search: true,
             value: this.state.searchColors,
             filterFn(text, item) {
@@ -122,6 +124,8 @@ class Example extends React.Component<any, any> {
                 <Select {...select1Props}/>
                 <h2>Basic with search</h2>
                 <Select {...select2Props}/>
+                <h2>Multiple with search</h2>
+                <Select {...select3Props}/>
             </div>
         );
     }
