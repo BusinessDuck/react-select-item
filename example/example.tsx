@@ -1,8 +1,40 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
-import {Select} from "./dist/react-select-item.js";
+import {Select, Option} from "./dist/react-select-item.js";
 import "./dist/styles.css";
 import "./example.css";
+
+export interface IOptionProps {
+    getOptionProps: (option: any) => {};
+    onClick: (value: any) => void;
+    selected: boolean;
+    option: any;
+}
+
+class CustomOption extends Option<IOptionProps, {}> {
+    /**
+     * Available props:
+     *
+     * getOptionProps: (option: any) => {};
+     * onClick: (value: any) => void;
+     * selected: boolean;
+     * option: any;
+     * @param props
+     */
+    constructor(props) {
+        super(props);
+    }
+
+    public render() {
+        const { option } = this.props;
+        return (
+            <div {...this.mergeOptionProps()}>
+                <span className="option-name"> {option.name}</span>
+                <span className="option-date"> {option.value.creationTs || option.creationTs} </span>
+            </div>
+        );
+    }
+}
 
 class Example extends React.Component<any, any> {
     constructor(props) {
@@ -47,6 +79,7 @@ class Example extends React.Component<any, any> {
                 value: {id: "yellow", creationTs: "20.01.2017 - 16:53:24"},
             },
             {
+                creationTs: "20.01.2017 - 16:53:24",
                 name: "Orange",
                 value: "orange",
             },
@@ -67,17 +100,6 @@ class Example extends React.Component<any, any> {
             customLabelsRender: (selected, placeholder) => {
                 return selected.length > 0 ? selected[0] : placeholder;
             },
-            // highlightTextGetter: (item) => {
-            //     return item.label[0].props.children.join("");
-            // },
-            // highlightTextSetter: (item, searchText, highlightedText) => {
-            //     return (
-            //         <span>
-            //             <span className="option-name"> {highlightedText.map((node: any) => node)}</span>
-            //             <span className="option-date"> {item.value.creationTs} </span>
-            //         </span>
-            //     );
-            // },
             noItemsText: "No items found",
             onChange: this.handleSingleSearchChange,
             optionTransform: (option) => {
@@ -95,25 +117,13 @@ class Example extends React.Component<any, any> {
         };
 
         const select3Props = {
+            OptionComponent: CustomOption,
             label: "Favorite Colors",
             multiple: true,
             onChange: this.handleMultiChange,
             options: optionsList,
             search: true,
             value: this.state.colors,
-        };
-
-        const select4Props = {
-            multiple: true,
-            noItemsText: "No items found",
-            onChange: this.handleMultiSearchChange,
-            placeholder: "Favorite Colors",
-            search: true,
-            value: this.state.searchColors,
-            filterFn(text, item) {
-                return item.label.indexOf(text) !== -1;
-            },
-
         };
 
         return (
@@ -124,7 +134,7 @@ class Example extends React.Component<any, any> {
                 <Select {...select1Props}/>
                 <h2>Basic with search</h2>
                 <Select {...select2Props}/>
-                <h2>Multiple with search</h2>
+                <h2>Multiple with search (custom)</h2>
                 <Select {...select3Props}/>
             </div>
         );
