@@ -55,7 +55,9 @@ export class Select extends React.Component<IProps, IState> {
         },
         multiple: false,
         onChange: () => null,
-        onSearch: () => null, //todo I have end here! make search works!
+        onSearch: (phrase, option) => {
+            return option.name.indexOf(phrase) !== -1;
+        },
         placeholder: "Select items",
         search: false,
         searchEmptyPlaceholder: "No items found",
@@ -286,11 +288,11 @@ export class Select extends React.Component<IProps, IState> {
         const className = classNames(["react-select-item-options", {
             "react-select-item-hidden": !this.state.open,
         }]);
-        let selectOptions: any[] = this.props.options;
+        let selectOptions: any[] = this.props.options.map((option) => ({...option}));
 
         if (search && this.state.searchText.length > 0) {
-            selectOptions = selectOptions.filter((item) => {
-                return onSearch(this.state.searchText, item);
+            selectOptions = selectOptions.filter((option) => {
+                return onSearch(this.state.searchText, option);
             });
             const {highlightTextGetter, highlightTextSetter} = this.props;
             selectOptions = this.highlightSearchText(selectOptions, highlightTextGetter, highlightTextSetter);
