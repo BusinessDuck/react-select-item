@@ -1,8 +1,9 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
-import { SelectItem } from "./dist/react-select-item.js";
+import {Select} from "./dist/react-select-item.js";
 import "./dist/styles.css";
 import "./example.css";
+import {Select} from "../src/components/Select";
 
 class Example extends React.Component<any, any> {
     constructor(props) {
@@ -32,26 +33,33 @@ class Example extends React.Component<any, any> {
     }
 
     public render() {
-        const childrens = [
-            {value: "red", name: "Red", disabled: true, creationTs: "20.01.2017 - 16:53:24"},
-            {value: "orange", name: "Orange", creationTs: "20.02.2017 - 12:33:04"},
-            {value: "green", name: "Green", creationTs: "10.01.2017 - 11:13:14"},
-            {value: "black", name: "Black", creationTs: "05.01.2017 - 15:23:01"},
-            {value: "yellow", name: "Yellow", creationTs: "04.01.2017 - 22:53:34"},
-            {value: "purple", name: "Purple", creationTs: "02.01.2017 - 11:25:51"},
+        const optionsList = [
             {
-                creationTs: "01.01.2017 - 01:22:10",
-                name: "Light greenish with a little bit of yellow",
-                value: "greenish",
+                disabled: true,
+                name: "Red",
+                value: {id: "red", creationTs: "20.01.2017 - 16:53:24"},
+            },
+            {
+                name: "Blue",
+                value: {id: "blue", creationTs: "20.01.2017 - 16:53:24"},
+            },
+            {
+                name: "Yellow",
+                value: {id: "yellow", creationTs: "20.01.2017 - 16:53:24"},
+            },
+            {
+                name: "Orange",
+                value: "orange",
             },
         ];
 
         const select1Props = {
             className: "my-example-select-box",
             closeOnChange: true,
-            label: "Favorite Color",
             onChange: this.handleChange,
             open: this.state.open,
+            options: optionsList,
+            placeholder: "Favorite Color",
             value: this.state.color,
         };
 
@@ -85,6 +93,7 @@ class Example extends React.Component<any, any> {
                     value: option.props.value,
                 };
             },
+            options: optionsList,
             search: true,
             value: this.state.searchColor,
         };
@@ -111,40 +120,12 @@ class Example extends React.Component<any, any> {
 
         return (
             <div className="example">
-                <h1>Select Item Example</h1>
-                <SelectItem {...select1Props}>
-                    {childrens.map((item: any, index) => (
-                            <option key={index} value={item} disabled={item.disabled}>{item.name}</option> // tslint:disable-line
-                        ),
-                    )}
-                </SelectItem>
-
-                <h1>Select Search Example</h1>
-                <SelectItem {...select2Props}>
-                    {childrens.map((item: any, index) => (
-                        <option key={index} value={item} disabled={item.disabled}>
-                            <span className="option-name"> {item.name}</span>
-                            <span className="option-date"> {item.creationTs} </span>
-                        </option>
-                        ),
-                    )}
-                </SelectItem>
-
-                <h1>Select Multiple Example</h1>
-                <SelectItem {...select3Props}>
-                    {childrens.map((item, index) => (
-                            <option key={index} value={item as any}>{item.name}</option>
-                        ),
-                    )}
-                </SelectItem>
-
-                <h1>Select Multiple Search Example</h1>
-                <SelectItem {...select4Props}>
-                    {childrens.map((item, index) => (
-                            <option key={index} value={item as any}>{item.name}</option>
-                        ),
-                    )}
-                </SelectItem>
+                <h1>Select Item Examples</h1>
+                <hr/>
+                <h2>Basic</h2>
+                <Select {...select1Props}/>
+                <h2>Basic with search</h2>
+                <Select {...select2Props}/>
             </div>
         );
     }

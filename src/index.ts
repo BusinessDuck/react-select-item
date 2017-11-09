@@ -1,4 +1,5 @@
 /**
  * @exports SelectItem
  */
-export { Component as SelectItem } from "./components/Select";
+export { Select } from "./components/Select";
+export { Option } from "./components/Option";

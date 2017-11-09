@@ -1,6 +1,6 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {Component as SelectItem} from "../Select";
+import {Select as SelectItem} from "../Select";
 
 // it("Increment change after click", () => {
 //     // Render a checkbox with placeholder in the document
