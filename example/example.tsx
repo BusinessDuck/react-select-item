@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import {Select} from "./dist/react-select-item.js";
 import "./dist/styles.css";
 import "./example.css";
-import {Select} from "../src/components/Select";
 
 class Example extends React.Component<any, any> {
     constructor(props) {
@@ -68,20 +67,17 @@ class Example extends React.Component<any, any> {
             customLabelsRender: (selected, placeholder) => {
                 return selected.length > 0 ? selected[0] : placeholder;
             },
-            filterFn: (text, item) => {
-                return item.label[0].props.children.join("").toLowerCase().indexOf(text.toLowerCase()) !== -1;
-            },
-            highlightTextGetter: (item) => {
-                return item.label[0].props.children.join("");
-            },
-            highlightTextSetter: (item, searchText, highlightedText) => {
-                return (
-                    <span>
-                        <span className="option-name"> {highlightedText.map((node: any) => node)}</span>
-                        <span className="option-date"> {item.value.creationTs} </span>
-                    </span>
-                );
-            },
+            // highlightTextGetter: (item) => {
+            //     return item.label[0].props.children.join("");
+            // },
+            // highlightTextSetter: (item, searchText, highlightedText) => {
+            //     return (
+            //         <span>
+            //             <span className="option-name"> {highlightedText.map((node: any) => node)}</span>
+            //             <span className="option-date"> {item.value.creationTs} </span>
+            //         </span>
+            //     );
+            // },
             label: "Favorite Color",
             noItemsText: "No items found",
             onChange: this.handleSingleSearchChange,
