@@ -34,8 +34,8 @@ export class Option extends React.Component<IOptionProps, {}> {
     }
 
     protected mergeOptionProps() {
-        const {getOptionProps} = this.props;
-        const {value, disabled, selected} = this.props.option;
+        const {getOptionProps, selected} = this.props;
+        const {value, disabled} = this.props.option;
         const inputProps: React.DetailedHTMLProps<any, any> = getOptionProps(value);
         const className = classNames({
             "react-select-item-option": true,
