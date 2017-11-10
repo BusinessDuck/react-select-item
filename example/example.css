@@ -18,6 +18,35 @@ h2 {
 /**
  Custom styles for dates here
  */
+.react-select-item-label-custom {
+  overflow: visible;
+  white-space: normal;
+}
+.option-badge {
+  background-color: #00A3D7;
+  box-sizing: border-box;
+  color: #ffffff;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 2px;
+  display: inline-block;
+  font-size: 12px;
+  height: 20px;
+  cursor: default;
+}
+.option-badge > .option-remove {
+  background-color: #0076c7;
+  cursor: pointer;
+  color: #ffffff;
+  border-radius: 30px;
+  width: 14px;
+  height: 14px;
+  font-size: 8px;
+  padding: 2px 4px 2px 2px;
+  margin: 5px;
+  text-transform: uppercase;
+}
+
 .option-name,
 .option-date {
   display: inline-block;

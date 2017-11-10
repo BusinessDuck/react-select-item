@@ -1,6 +1,6 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
-import {Select, Option} from "./dist/react-select-item.js";
+import {Select, Option, Label} from "./dist/react-select-item.js";
 import "./dist/styles.css";
 import "./example.css";
 
@@ -26,13 +26,63 @@ class CustomOption extends Option<IOptionProps, {}> {
     }
 
     public render() {
-        const { option } = this.props;
+        const {option} = this.props;
         return (
-            <div {...this.mergeOptionProps()}>
+            <div {...this.getOptionProps()}>
                 <span className="option-name"> {option.name}</span>
                 <span className="option-date"> {option.value.creationTs || option.creationTs} </span>
             </div>
         );
+    }
+}
+
+
+export interface ILabelProps {
+    getLabelProps: (option: any) => {};
+    getLabelElementProps: (option: any) => {};
+    selectedOptions: any[];
+    placeholder: string;
+    props: any;
+}
+
+class CustomLabel extends Label<ILabelProps, {}> {
+    /**
+     * Available props:
+     *
+     * getOptionProps: (option: any) => {};
+     * onClick: (value: any) => void;
+     * selected: boolean;
+     * option: any;
+     * @param props
+     */
+    constructor(props) {
+        super(props);
+    }
+
+    public render() {
+        return (
+            <div {...this.getLabelProps()}>
+                {this.renderLabel()}
+            </div>
+        );
+    }
+
+    private renderLabel() {
+        const {selectedOptions, getLabelElementProps, placeholder} = this.props;
+        if (!selectedOptions.length) {
+            return placeholder;
+        }
+        return selectedOptions.map((option, index) => {
+        const elementProps = getLabelElementProps(option);
+            return (
+                <span key={index}>
+                    <span className="option-badge" title={option.value.creationTs || option.creationTs}>
+                    {option.name}
+                        <span className="option-remove" onClick={() => elementProps.onClickRemove(option)}> X </span>
+                    </span>
+                </span>
+            );
+        });
     }
 }
 
@@ -61,6 +111,25 @@ class Example extends React.Component<any, any> {
 
     public handleMultiSearchChange = (colors) => {
         this.setState({searchColors: colors});
+    }
+
+    public  getOptionId(value) {
+        if (typeof value === "object" && typeof value.id !== "undefined") {
+            return value.id;
+        }
+
+        return value;
+    }
+
+    public onClickRemove = ({value}) => {
+        const colors = this.state.colors;
+        const targetValueIndex = colors.findIndex((optionValue) => {
+            return this.getOptionId(value) === this.getOptionId(optionValue);
+        });
+        if (targetValueIndex !== -1) {
+            colors.splice(targetValueIndex, 1);
+        }
+        this.setState({colors});
     }
 
     public render() {
@@ -117,7 +186,10 @@ class Example extends React.Component<any, any> {
         };
 
         const select3Props = {
+            LabelComponent: CustomLabel,
             OptionComponent: CustomOption,
+            getLabelElementProps: () => ({onClickRemove: this.onClickRemove}),
+            getLabelProps: () => ({className: "react-select-item-label-custom"}),
             label: "Favorite Colors",
             multiple: true,
             onChange: this.handleMultiChange,
@@ -125,6 +197,8 @@ class Example extends React.Component<any, any> {
             search: true,
             value: this.state.colors,
         };
+
+
 
         return (
             <div className="example">
