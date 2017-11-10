@@ -21,6 +21,7 @@ export interface IProps {
     highlightTextGetter: any;
     highlightTextSetter: any;
     search: boolean;
+    searchText: string;
     multiple: boolean;
     searchEmptyPlaceholder?: string;
     searchPlaceholder?: string;

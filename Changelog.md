@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.1.0] - 2017-11-10
+## Changes
+- Label prop renamed to Placeholder
+- CustomLabelRender removed
+- Custom option render removed
+- Option component defaulted and exported from library main file
+- Label component defaulted and exported from library main file
+- Select props changes
+- Add new examples
+- Move from children based architecture to component inside
+- Css classes and dom nodes changes
+
 ## [3.0.10] - 2017-10-09
 ## Changes
 - Removed extra dependencies
