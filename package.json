@@ -18,9 +18,9 @@
   "author": "Dmitriy Yurov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fuse-box/fuse-box-examples/issues"
+    "url": "https://github.com/BusinessDuck/react-select-item/issues"
   },
-  "homepage": "https://github.com/fuse-box/fuse-box-examples",
+  "homepage": "https://github.com/BusinessDuck/react-select-item",
   "devDependencies": {
     "@types/core-js": "^0.9.43",
     "@types/jest": "^21.1.2",

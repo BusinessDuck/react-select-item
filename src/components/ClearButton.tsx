@@ -10,7 +10,7 @@ export interface ICButtonProps {
 
 // RSI react-select-item v3
 export class ClearButton extends React.Component<ICButtonProps, {}> {
-
+    //todo will be implemented later
     public static defaultProps = {
         getOptionProps: () => ({}),
     };

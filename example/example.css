@@ -35,7 +35,7 @@ h2 {
   cursor: default;
 }
 .option-badge > .option-remove {
-  background-color: #0076c7;
+  background-color: rgba(51, 122, 183, 0.6509803921568628);
   cursor: pointer;
   color: #ffffff;
   border-radius: 30px;

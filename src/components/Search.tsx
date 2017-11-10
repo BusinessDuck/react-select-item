@@ -10,7 +10,7 @@ export interface ISearchProps {
 
 // RSI react-select-item v3
 export class Search extends React.Component<ISearchProps, {}> {
-
+    //todo will be implemented later
     public static defaultProps = {
         getOptionProps: () => ({}),
     };
