@@ -17,7 +17,7 @@ $ npm install react-select-item --save
 
 ## Features
 
-```
+
 1. Very customizable components, you can see very different usage in [Demo](https://businessduck.github.io/react-select-item/)
 Just extend default option or label and re-define render function by you own needed
 ```
@@ -73,7 +73,6 @@ You can use value as object with "id" key or plaint value with text or number, i
 3. Customizable search with text highlighting. You can use highlightTestSetter/Getter for highlight complaint objects
 ot customize text passed from different places.
 
-```
 
 ## Props Guide
 | Property | Type | Description |
