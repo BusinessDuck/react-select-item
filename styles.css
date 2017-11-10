@@ -15,22 +15,20 @@
   text-align: left;
   background-color: transparent; }
 
-.react-select-item-options-search {
+.react-select-item-search {
   padding: 18px 20px;
   display: inline-block;
   width: 100%;
-  height: 20px;
+  height: 40px;
   box-sizing: border-box;
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkZFMDk0RTNFNUZBMzExRTBBM0YxRERGQ0FERjBCN0FEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkZFMDk0RTNGNUZBMzExRTBBM0YxRERGQ0FERjBCN0FEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkUwOTRFM0M1RkEzMTFFMEEzRjFEREZDQURGMEI3QUQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkUwOTRFM0Q1RkEzMTFFMEEzRjFEREZDQURGMEI3QUQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6hWFpuAAAAMFBMVEXY2Nh3d3eLi4uoqKjOzs6enp7s7OyVlZXFxcWxsbHi4uKBgYFubm719fVkZGT///8UZAOpAAAAXUlEQVR42kSMWxKAMAgDqdoHLST3v62pjuN+0CydYNwM95GkKeaCKPORiji9YG1JYGoGTGLaPf8umQiVuTB2J9BbViCNeeBl0Pbd6MC61NYbky92/JnWvH2ZtwADABv4BwVV063mAAAAAElFTkSuQmCC") no-repeat scroll 3px 12px;
-  border: 1px solid rgba(157, 157, 157, 0.79);
-  border-left: 0;
-  border-right: 0;
+  border: none;
   font-size: 12px;
   font-weight: bold;
   color: #7B8E9B; }
-  .react-select-item-options-search:focus {
+  .react-select-item-search, .react-select-item-search:focus {
     outline: none; }
-  .react-select-item-options-search::-webkit-input-placeholder {
+  .react-select-item-search::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     color: #CECECE; }
 
@@ -136,6 +134,12 @@
   margin: 0;
   padding: 0; }
 
+.select-item-no-results {
+  color: #707070;
+  padding: 9px 10px;
+  font-size: 12px;
+  font-weight: 600; }
+
 .react-select-item-option {
   padding: 10px 20px;
   margin: 0;
@@ -198,7 +202,7 @@ body {
   font-family: sans-serif;
   background-color: #363636;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 10px;
 }
 
 h1 {
@@ -206,9 +210,43 @@ h1 {
   color: #aaa;
 }
 
+h2 {
+  font-size: 18px;
+  color: #aaa;
+}
+
 /**
  Custom styles for dates here
  */
+.react-select-item-label-custom {
+  overflow: visible;
+  white-space: normal;
+}
+.option-badge {
+  background-color: #00A3D7;
+  box-sizing: border-box;
+  color: #ffffff;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 2px;
+  display: inline-block;
+  font-size: 12px;
+  height: 20px;
+  cursor: default;
+}
+.option-badge > .option-remove {
+  background-color: rgba(51, 122, 183, 0.6509803921568628);
+  cursor: pointer;
+  color: #ffffff;
+  border-radius: 30px;
+  width: 14px;
+  height: 14px;
+  font-size: 8px;
+  padding: 2px 4px 2px 2px;
+  margin: 5px;
+  text-transform: uppercase;
+}
+
 .option-name,
 .option-date {
   display: inline-block;
