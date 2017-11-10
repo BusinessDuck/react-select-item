@@ -26,20 +26,16 @@ describe("SelectItem component", function() {
         {value: "blue", name: "Blue"},
     ];
     const defaultProps: React.DetailedHTMLProps<any, any> = {
-        label: "foo",
-        value: [],
         onChange() {
         },
+        options: testOptions,
+        placeholder: "foo",
+        value: [],
     };
 
     beforeEach(() => {
         this.shallow = shallow(
-            <SelectItem {...defaultProps}>
-                {testOptions.map((item: any, index: number) => (
-                        <option key={index} value={item}>{item.name}</option>
-                    ),
-                )}
-            </SelectItem>,
+            <SelectItem {...defaultProps}/>,
         );
         this.target = this.shallow.find("div.react-select-item");
     });
@@ -50,13 +46,13 @@ describe("SelectItem component", function() {
     });
 
     it("should render the placeholder when no value is selected", () => {
-        const label = this.shallow.find("div.react-select-item-placeholder");
-        expect(label).toBeDefined();
-        expect(label.text()).toEqual(defaultProps.label);
+        const label = this.shallow.find("Label").first();
+        expect(label.length).toBe(1);
+        expect(label.props().placeholder).toEqual(defaultProps.placeholder);
     });
 
     it("should render the menu node with options", () => {
-        const optionsNode = this.shallow.find("div.react-select-item-off-screen");
+        const optionsNode = this.shallow.find("div.react-select-item-options");
         expect(optionsNode).toBeDefined();
         expect(optionsNode.length).toBe(1);
         expect(optionsNode.children().length).toEqual(testOptions.length);
@@ -65,29 +61,28 @@ describe("SelectItem component", function() {
     it("should open menu on button click event", () => {
         let menuNode = this.shallow.find("div.react-select-item-options");
 
-        expect(menuNode).toBeDefined();
+        expect(menuNode.length).toBe(1);
         expect(menuNode.hasClass("react-select-item-hidden")).toBeTruthy();
         this.target.simulate("click");
 
         menuNode = this.shallow.find("div.react-select-item-options");
-        let optionsNode = this.shallow.find("div.react-select-item-off-screen");
 
         expect(menuNode.hasClass("react-select-item-hidden")).toBeFalsy();
-        optionsNode.find("a").first().simulate("click", "red");
+        menuNode.find("Option").first().simulate("click", "red");
 
-        optionsNode = this.shallow.find("div.react-select-item-off-screen");
+        menuNode = this.shallow.find("div.react-select-item-options");
 
-        expect(optionsNode.find("a").first().hasClass("react-select-item-option-selected")).toBeTruthy();
+        expect(menuNode.find("Option").first().render().hasClass("react-select-item-option-selected")).toBeTruthy();
         this.target.simulate("click");
 
         menuNode = this.shallow.find("div.react-select-item-options");
 
         expect(menuNode.hasClass("react-select-item-hidden")).toBeTruthy();
 
-        const label = this.shallow.find(".react-select-item-placeholder");
+        const label = this.shallow.find("Label");
 
         expect(label.length).toBe(1);
-        expect(label.text()).toEqual(testOptions[0].name);
+        expect(label.render().text()).toEqual(testOptions[0].name);
     });
 
 });
