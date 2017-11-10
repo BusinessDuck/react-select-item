@@ -115,7 +115,7 @@ Defaults to port `4444`, check the localhost:4444 to view the library usage
 ```javascript
 import React, { PropTypes } from "react";
 import { noop } from "lodash";
-import SelectItem from "react-select-item";
+import { Select as SelectItem } from "react-select-item";
 
 export default class MultiSelectFilter extends React.Component {
 
@@ -140,11 +140,6 @@ export default class MultiSelectFilter extends React.Component {
     className: ""
   };
 
-  /**
-   * Component constructor
-   * The component is depended from Bootstrap 3.x (styles only)
-   * @param props
-   */
   constructor(props) {
     super(props);
     this.state = {
@@ -162,17 +157,14 @@ export default class MultiSelectFilter extends React.Component {
       <div className={this.props.wrapperClassName}>
         <div className="form-group">
           <label>{this.props.label}</label>
-          <SelectItem label={this.props.label}
+          <SelectItem placeholder={this.props.label}
                      onChange={this.handleMultiChange}
                      value={this.state.values}
                      closeText={false}
                      className="form-control"
-                     multiple={true}>
-            { this.props.options.map((item, index) => (
-                <option key={index} value={item}>{item.name}</option>
-              )
-            )}
-          </SelectItem>
+                     multiple={true}
+                     options={this.props.options}
+          />
         </div>
       </div>
     );
