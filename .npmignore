@@ -9,4 +9,4 @@ build
 tsconfig.json
 tslint.json
 .npmignore
-urils
+utils
