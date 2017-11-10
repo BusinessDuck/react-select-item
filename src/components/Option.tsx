@@ -6,6 +6,7 @@ export interface IOptionProps {
     onClick: (value: any) => void;
     selected: boolean;
     option: any;
+    props: any;
 }
 
 // RSI react-select-item v3
@@ -21,7 +22,7 @@ export class Option extends React.Component<IOptionProps, {}> {
 
     public render() {
         const {name} = this.props.option;
-        return <div {...this.mergeOptionProps()}>{name}</div>;
+        return <div {...this.getOptionProps()}>{name}</div>;
     }
 
     private onClick = () => {
@@ -33,7 +34,7 @@ export class Option extends React.Component<IOptionProps, {}> {
         return onClick(value);
     }
 
-    private mergeOptionProps() {
+    private getOptionProps() {
         const {getOptionProps, selected} = this.props;
         const {value, disabled} = this.props.option;
         const inputProps: React.DetailedHTMLProps<any, any> = getOptionProps(value);
@@ -43,7 +44,7 @@ export class Option extends React.Component<IOptionProps, {}> {
             "react-select-item-option-selected": selected,
         });
         const optionProps: React.DetailedHTMLProps<any, any> = {
-            ...getOptionProps(value),
+            ...inputProps,
             className: classNames([className, inputProps.className]),
             onClick: this.onClick,
             tabIndex: -1,

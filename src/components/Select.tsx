@@ -1,13 +1,17 @@
 import * as classNames from "classnames/bind";
 import * as React from "react";
+import {Label} from "./Label";
 import {Option} from "./Option";
 
 import "./styles.scss";
 
 export interface IProps {
+    LabelComponent: any;
     OptionComponent: any;
     closeOnChange?: boolean;
     getOptionProps?: (option: any) => {};
+    getLabelProps?: (option: any) => {};
+    getLabelElementProps?: (option: any) => {};
     getOptionId?: (value) => (string | number);
     placeholder?: string;
     value?: any[];
@@ -35,6 +39,7 @@ export interface IState {
 // RSI react-select-item v3
 export class Select extends React.Component<IProps, IState> {
     public static defaultProps: Partial<IProps> = {
+        LabelComponent: Label,
         OptionComponent: Option,
         getOptionId: (value) => {
             if (typeof value === "object" && typeof value.id !== "undefined") {
@@ -102,6 +107,7 @@ export class Select extends React.Component<IProps, IState> {
     public componentWillReceiveProps(nextProps) {
         this.setState({
             open: nextProps.open || this.state.open,
+            search: false,
             searchText: nextProps.searchText || this.state.searchText,
             value: nextProps.value,
         });
@@ -221,20 +227,6 @@ export class Select extends React.Component<IProps, IState> {
     }
 
     /**
-     * Render selected items labels, may be replaced by custom render passed in prop customLabelsRender
-     * @returns {string}
-     */
-    private renderLabel() {
-        const selected = this.props.options
-            .filter((option: any) => this.isSelected(option.value))
-            .map((option: any) => option.name);
-        if (this.props.customLabelsRender) {
-            return this.props.customLabelsRender(selected, this.props.placeholder);
-        }
-        return selected.length > 0 ? selected.join(", ") : this.props.placeholder;
-    }
-
-    /**
      * Private render main button RSI
      * @returns {any}
      */
@@ -247,12 +239,17 @@ export class Select extends React.Component<IProps, IState> {
             "ref": (ref) => this.buttonRef = ref,
             "tabIndex": "0",
         };
+        const {LabelComponent, options, getLabelProps, placeholder, getLabelElementProps} = this.props;
+        const labelProps: React.DetailedHTMLProps<any, any> = {
+            getLabelElementProps,
+            getLabelProps,
+            placeholder,
+            selectedOptions: options.filter((option: any) => this.isSelected(option.value)),
+        };
 
         return (
             <div {...buttonProps}>
-                <div className="react-select-item-label">
-                    {this.state.search ? this.renderSearchInput() : this.renderLabel()}
-                </div>
+                {this.state.search ? this.renderSearchInput() : <LabelComponent {...labelProps}/>}
                 {this.renderClearButton()}
             </div>
         );
